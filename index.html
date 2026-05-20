@@ -33,7 +33,7 @@
         .brand img { width: 40px; height: auto; }
         .brand span { font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.2; word-break: break-word; }
         
-        /* Tombol "+ Baru" - SEKARANG LEBIH MEWAH & BUKAN ICON GOOGLE */
+        /* Tombol "+ Baru" */
         .new-dropdown-wrapper { position: relative; width: max-content; margin-bottom: 15px; padding-left: 5px; }
         .btn-new { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 12px 26px; font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 12px; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: 0.2s; }
         .btn-new:hover { box-shadow: 0 4px 12px rgba(15,118,110,0.15); background: var(--hover); border-color: var(--primary); }
@@ -83,7 +83,7 @@
         .folder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; margin-bottom: 20px; }
         .folder-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: 0.2s; box-sizing: border-box; }
         .folder-card:hover { border-color: var(--primary); background: var(--bg); transform: translateY(-1px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
-        .folder-card i { font-size: 22px; color: var(--sub); }
+        .folder-card i { font-size: 22px; color: var(--primary); }
         .folder-card span { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
         /* Tampilan Mode Grid untuk FILE */
@@ -654,15 +654,24 @@
             setTimeout(() => { stat.innerText = ""; tutupModalUpload(); loadFilesFromServer(navState.activeFolderId); }, 1000);
         }
 
+        /* =========================================================================
+           PERBAIKAN FITUR DOWNLOAD UTK MENYEMBUNYIKAN PERINGATAN CHROME DANGEROUS FILE
+           ========================================================================= */
         async function downloadFile(id) {
+            // Tampilkan animasi loading di dashboard Anda
             document.getElementById('loading-msg').classList.remove('hidden');
-            let res = await fetchAPI("download", { fileId: id });
-            document.getElementById('loading-msg').classList.add('hidden');
-            if(res.status === "SUCCESS") {
-                let a = document.createElement('a');
-                a.href = "data:" + res.data.mimeType + ";base64," + res.data.base64;
-                a.download = res.data.nama; a.click();
-            }
+            
+            // Solusi Mutakhir: Gunakan Link API Export/Download Resmi Google Drive
+            // Melewati skema Base64 lokal agar tidak diprotes sistem keamanan Google Chrome
+            let downloadUrl = `https://drive.google.com/uc?export=download&id=${id}`;
+            
+            // Picu unduhan di tab baru
+            window.open(downloadUrl, '_blank');
+            
+            // Sembunyikan kembali status loading setelah jeda 1 detik
+            setTimeout(() => {
+                document.getElementById('loading-msg').classList.add('hidden');
+            }, 1000);
         }
 
         async function deleteFile(id) {
