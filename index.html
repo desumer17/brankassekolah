@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Brankas - SD Negeri 17 Dauh Puri</title>
-    <link rel="icon" type="image/png" href="logo-sekolah.png">
+    <title>Brankas Digital - SD Negeri 17 Dauh Puri</title>
+    <link class="image" rel="icon" type="image/png" href="logo-sekolah.png">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -20,7 +20,6 @@
         /* Sidebar Kiri (Desktop) */
         #sidebar { width: 280px; background: var(--bg); display: flex; flex-direction: column; padding: 15px 12px; border-right: 1px solid var(--border); transition: all 0.3s ease; z-index: 999; box-sizing: border-box; }
         
-        /* CSS BRANDING SIDEBAR (DIPERBARUI AGAR PAS UNTUK NAMA PANJANG) */
         .brand { display: flex; align-items: center; gap: 10px; padding: 5px 10px 25px; border-bottom: 1px solid var(--border); margin-bottom: 15px; }
         .brand img { width: 40px; height: auto; }
         .brand span { font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.2; word-break: break-word; }
@@ -44,13 +43,12 @@
         .nav-item i { width: 20px; text-align: center; font-size: 18px; color: var(--sub); }
         .user-info-box { margin-top: auto; padding: 15px; background: var(--hover); border-radius: 12px; font-size: 13px; color: var(--sub); display: flex; justify-content: space-between; align-items: center; }
 
-        /* Area Utama (File Explorer) */
+        /* Area Utama */
         #main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--surface); }
         
-        /* Top Bar dengan Search Bar Terintegrasi */
+        /* Top Bar */
         .top-bar { padding: 12px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--surface); gap: 20px; }
         
-        /* Kolom Pencarian Google Drive Style */
         .search-container { flex: 1; max-width: 600px; position: relative; display: flex; align-items: center; }
         .search-container i { position: absolute; left: 16px; color: var(--sub); font-size: 16px; }
         .search-container input { width: 100%; padding: 12px 16px 12px 48px; border: none; background: #edf2fa; border-radius: 24px; font-size: 15px; color: var(--text); transition: all 0.2s; box-sizing: border-box; }
@@ -97,7 +95,7 @@
         .file-name-cell { display: flex; align-items: center; gap: 12px; cursor: pointer; font-weight: 500; }
         .file-name-cell i { font-size: 18px; }
         
-        /* Kancing Titik Tiga & Context Menu */
+        /* Context Menu */
         .action-btn { background: none; border: none; cursor: pointer; padding: 8px; border-radius: 50%; color: var(--sub); transition: 0.2s; }
         .action-btn:hover { background: #e0e0e0; color: var(--text); }
         .context-menu-wrapper { position: relative; display: inline-block; }
@@ -119,12 +117,11 @@
         .btn-modal.confirm { background: var(--primary); color: white; }
         .btn-modal.confirm:disabled { background: var(--border); cursor: not-allowed; }
 
-        /* Hambuger & Mobile Overlay */
+        /* Mobile Responsive */
         .mobile-toggle { display: none; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--sub); padding: 8px; border-radius: 50%; }
         .mobile-toggle:hover { background: var(--hover); }
         #sidebar-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 998; }
 
-        /* RESPONSIVE LAYOUT UNTUK HP (MUTAKHIR) */
         @media (max-width: 768px) {
             #sidebar { position: fixed; left: -280px; top: 0; height: 100%; box-shadow: 4px 0 16px rgba(0,0,0,0.15); border-right: none; }
             #sidebar.open { left: 0; }
@@ -141,19 +138,20 @@
             .file-grid-layout { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .folder-card { padding: 12px; gap: 10px; border-radius: 8px; }
             .folder-card span { font-size: 13px; }
-            
-            /* Sembunyikan kolom sekunder tabel di HP */
             .file-list th:nth-child(2), .file-list th:nth-child(3),
             .file-list td:nth-child(2), .file-list td:nth-child(3) { display: none; }
         }
         
         /* STYLE HALAMAN LOGIN */
-        #login-page { position: fixed; top:0; left:0; width:100vw; height:100vh; background:#f0f4f9; display: flex; justify-content: center; align-items: center; z-index: 9999; }
-        .login-card { background: white; padding: 40px 30px; border-radius: 24px; text-align: center; width: 100%; max-width: 360px; box-shadow: 0 4px 24px rgba(0,0,0,0.04); border: 1px solid #dadce0; box-sizing: border-box; }
+        #login-page { position: fixed; top:0; left:0; width:100vw; height:100vh; background:#f0f4f9; display: flex; justify-content: center; align-items: center; z-index: 9999; flex-direction: column; }
+        .login-card { background: white; padding: 40px 30px; border-radius: 24px; text-align: center; width: 100%; max-width: 360px; box-shadow: 0 4px 24px rgba(0,0,0,0.04); border: 1px solid #dadce0; box-sizing: border-box; z-index: 2; }
         .login-card input { width: 100%; padding: 14px; margin-bottom: 12px; border: 1px solid #dadce0; border-radius: 8px; box-sizing: border-box; font-size: 15px; }
         .login-card input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(11,87,208,0.15); }
         .btn-login-submit { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 24px; font-weight: 500; font-size: 15px; width: 100%; cursor: pointer; margin-top: 10px; transition: 0.2s; }
         .btn-login-submit:hover { background: #0a4ebd; }
+        
+        /* Gaya Teks Copyright */
+        .login-footer-copyright { position: absolute; bottom: 20px; text-align: center; font-size: 12px; color: var(--sub); font-weight: 400; letter-spacing: 0.3px; z-index: 1; }
     </style>
 </head>
 <body>
@@ -164,15 +162,18 @@
         <div class="login-card">
             <img src="logo-sekolah.png" alt="Logo" width="70" style="margin-bottom:15px;">
             <h2 style="margin:0 0 6px; font-weight:500; font-size:24px; color:var(--text);">Brankas Digital</h2>
-            <p style="color:var(--sub); font-size:14px; margin-bottom:28px; margin-top:0;">Gunakan Akun Guru Anda</p>
+            <p style="color:var(--sub); font-size:14px; margin-bottom:28px; margin-top:0;">SD Negeri 17 Dauh Puri</p>
             <input type="text" id="username" placeholder="Username / NIP">
             <input type="password" id="password" placeholder="Password">
             <button class="btn-login-submit" id="btn-login" onclick="login()">Masuk</button>
         </div>
+        
+        <div class="login-footer-copyright">
+            &copy; 2026 <b>3D Creative</b>. All Rights Reserved.
+        </div>
     </div>
 
     <div id="app-container" class="hidden">
-        
         <div id="sidebar">
             <div class="brand">
                 <img src="logo-sekolah.png" alt="Logo">
@@ -205,15 +206,12 @@
         </div>
 
         <div id="main-content">
-            
             <div class="top-bar">
                 <button class="mobile-toggle" onclick="openMobileSidebar()"><i class="fas fa-bars"></i></button>
-                
                 <div class="search-container">
                     <i class="fas fa-search"></i>
                     <input type="text" id="search-input" placeholder="Cari folder atau file dokumen..." oninput="jalankanPencarian()">
                 </div>
-                
                 <div class="top-right-icons">
                     <i id="view-icon-grid" class="fas fa-th-large active" onclick="setViewMode('grid')" title="Tampilan Grid"></i>
                     <i id="view-icon-list" class="fas fa-list" onclick="setViewMode('list')" title="Tampilan Daftar"></i>
@@ -234,13 +232,12 @@
                 
                 <div id="box-file-section" class="hidden">
                     <h3 class="section-title" id="title-files">Berkas Dokumen</h3>
-                    
                     <div id="files-render-zone"></div>
                 </div>
                 
                 <div id="loading-msg" class="hidden" style="text-align:center; color:var(--sub); margin-top:40px; font-size:14px;">
                     <i class="fas fa-circle-notch fa-spin" style="color:var(--primary); font-size:24px; margin-bottom:10px;"></i>
-                    <div>Sedang memproses dokumen...</div>
+                    <div id="loading-text">Sedang memproses dokumen...</div>
                 </div>
             </div>
         </div>
@@ -271,17 +268,13 @@
     <div id="modal-brankas" class="modal hidden" onclick="event.target.id==='modal-brankas' && tutupModalBrankas()">
         <div class="modal-box">
             <h3><i class="fas fa-folder-plus" style="color:#1a73e8;"></i> Tambah Brankas Utama</h3>
-            
             <input type="text" id="add-b-nama" placeholder="Nama Brankas (Cth: SK Pembagian Tugas)">
             <input type="text" id="add-b-icon" placeholder="Icon FontAwesome (Cth: fa-file-signature)" value="fa-folder">
-            
             <select id="add-b-tipe" onchange="document.getElementById('add-b-target').placeholder = this.value==='folder'?'ID Folder Google Drive':'Link URL Tujuan External'">
                 <option value="folder">Tipe: Folder Google Drive</option>
                 <option value="link">Tipe: Tautan / Link External</option>
             </select>
-            
             <input type="text" id="add-b-target" placeholder="ID Folder Google Drive">
-            
             <div class="modal-buttons">
                 <button class="btn-modal cancel" onclick="tutupModalBrankas()">Batal</button>
                 <button class="btn-modal confirm" id="btn-submit-brankas" onclick="prosesSimpanBrankas()">Simpan Brankas</button>
@@ -290,15 +283,13 @@
     </div>
 
     <script>
-        // MASUKKAN URL APPS SCRIPT ANDA DI SINI (DARI HASIL DEPLOY VERSI BARU)
         const GAS_URL = "https://script.google.com/macros/s/AKfycbyV5030Hr3wFqW1LPWWuoJmH-0IeuiSIa6ngtN7P788USp33BDOXinsJhfMFFWrAgas/exec";
         
         let DATA_BRANKAS = [];
         let DATA_SUBFOLDERS = {};
-        let RAW_ACTIVE_FILES = []; // Tempat menyimpan data file asli sebelum di-filter search
+        let RAW_ACTIVE_FILES = []; 
         let currentUser = {};
         let currentViewMode = localStorage.getItem('drive_view_pref') || 'grid';
-        
         let navState = { level: 1, brankasId: "", brankasNama: "", subFolderId: "", subFolderNama: "", activeFolderId: "", activeFolderName: "" };
 
         function openMobileSidebar() {
@@ -324,23 +315,19 @@
             if(navState.level > 1) renderFiles(RAW_ACTIVE_FILES);
         }
 
-        // --- MANAJEMEN ICON DAN WARNA FILE SECARA OTOMATIS ---
         function getFileIconConfig(filename) {
             let ext = filename.split('.').pop().toLowerCase();
-            let conf = { icon: "fa-file", color: "#5f6368" }; // Default abu-abu
-            
-            if (["pdf"].includes(ext)) { conf.icon = "fa-file-pdf"; conf.color = "#ea4335"; } // Merah
-            else if (["doc","docx","odt"].includes(ext)) { conf.icon = "fa-file-word"; conf.color = "#1a73e8"; } // Biru
-            else if (["xls","xlsx","ods","csv"].includes(ext)) { conf.icon = "fa-file-excel"; conf.color = "#188038"; } // Hijau
-            else if (["ppt","pptx"].includes(ext)) { conf.icon = "fa-file-powerpoint"; conf.color = "#f4b400"; } // Kuning
-            else if (["jpg","jpeg","png","gif","svg","webp"].includes(ext)) { conf.icon = "fa-file-image"; conf.color = "#fa7b17"; } // Orange
-            else if (["zip","rar","7z","tar"].includes(ext)) { conf.icon = "fa-file-archive"; conf.color = "#af52de"; } // Ungu
+            let conf = { icon: "fa-file", color: "#5f6368" }; 
+            if (["pdf"].includes(ext)) { conf.icon = "fa-file-pdf"; conf.color = "#ea4335"; } 
+            else if (["doc","docx","odt"].includes(ext)) { conf.icon = "fa-file-word"; conf.color = "#1a73e8"; } 
+            else if (["xls","xlsx","ods","csv"].includes(ext)) { conf.icon = "fa-file-excel"; conf.color = "#188038"; } 
+            else if (["ppt","pptx"].includes(ext)) { conf.icon = "fa-file-powerpoint"; conf.color = "#f4b400"; } 
+            else if (["jpg","jpeg","png","gif","svg","webp"].includes(ext)) { conf.icon = "fa-file-image"; conf.color = "#fa7b17"; } 
+            else if (["zip","rar","7z","tar"].includes(ext)) { conf.icon = "fa-file-archive"; conf.color = "#af52de"; } 
             else if (["mp4","mkv","avi","mov"].includes(ext)) { conf.icon = "fa-file-video"; conf.color = "#e21212"; }
-            
             return conf;
         }
 
-        // --- PROSES LOGIN ---
         async function login() {
             let u = document.getElementById('username').value;
             let p = document.getElementById('password').value;
@@ -380,7 +367,6 @@
             }
         }
 
-        // --- DRIVE UTAMA (LEVEL 1) ---
         function goHome() {
             navState = { level: 1, activeFolderId: "", activeFolderName: "" };
             closeMobileSidebar();
@@ -389,39 +375,28 @@
             document.getElementById('box-folder-section').classList.remove('hidden');
             document.getElementById('title-folders').innerText = "Daftar Brankas Utama";
             document.getElementById('box-file-section').classList.add('hidden');
-            
             renderFolders(DATA_BRANKAS);
         }
 
-        // --- MASUK KE BRANKAS (LEVEL 2) ---
         async function openBrankas(targetId, nama, tipe) {
             if(tipe === "link") return window.open(targetId, '_blank');
-            
             navState.level = 2; navState.brankasId = targetId; navState.brankasNama = nama;
             navState.activeFolderId = targetId; navState.activeFolderName = nama;
-            
             closeMobileSidebar();
             document.getElementById('search-input').value = "";
             updateBreadcrumb();
-            
-            // Render SubFolder jika ada
             let listSubs = DATA_SUBFOLDERS[nama] || [];
             renderFolders(listSubs, true);
-            
             await loadFilesFromServer(targetId);
         }
 
-        // --- MASUK KE SUB-FOLDER (LEVEL 3) ---
         async function openSubFolder(subId, subNama) {
             navState.level = 3; navState.subFolderId = subId; navState.subFolderNama = subNama;
             navState.activeFolderId = subId; navState.activeFolderName = subNama;
-            
             document.getElementById('search-input').value = "";
             updateBreadcrumb();
-            
             document.getElementById('box-folder-section').classList.add('hidden');
             document.getElementById('folder-container').innerHTML = "";
-            
             await loadFilesFromServer(subId);
         }
 
@@ -436,7 +411,6 @@
             document.getElementById('breadcrumb-area').innerHTML = html;
         }
 
-        // --- CORE RENDER FOLDER ---
         function renderFolders(arr, isSubFolder = false) {
             let fContainer = document.getElementById('folder-container');
             if(!arr || arr.length === 0) {
@@ -444,7 +418,6 @@
                 else { fContainer.innerHTML = "<p style='padding:20px; color:var(--sub);'>Tidak ada folder brankas.</p>"; }
                 return;
             }
-            
             document.getElementById('box-folder-section').classList.remove('hidden');
             document.getElementById('title-folders').innerText = isSubFolder ? "Sub-Folder Berkas" : "Daftar Brankas Utama";
             fContainer.innerHTML = "";
@@ -464,19 +437,16 @@
             });
         }
 
-        // --- SISTEM DOWNLOAD & LOAD BERKAS ---
         async function loadFilesFromServer(folderId) {
             document.getElementById('box-file-section').classList.remove('hidden');
             let zone = document.getElementById('files-render-zone');
             let loading = document.getElementById('loading-msg');
-            
             zone.innerHTML = "";
             loading.classList.remove('hidden');
             
             try {
                 let res = await fetchAPI("getFiles", { folderId: folderId });
                 loading.classList.add('hidden');
-                
                 if(res.status === "SUCCESS") {
                     RAW_ACTIVE_FILES = res.data.sort((a,b) => a.nama.localeCompare(b.nama));
                     renderFiles(RAW_ACTIVE_FILES);
@@ -495,7 +465,6 @@
             }
 
             if(currentViewMode === 'grid') {
-                // RENDER MODEL KOTAK / GRID STYLE
                 let html = `<div class="file-grid-layout">`;
                 filesArray.forEach(f => {
                     let cfg = getFileIconConfig(f.nama);
@@ -526,7 +495,6 @@
                 html += `</div>`;
                 zone.innerHTML = html;
             } else {
-                // RENDER MODEL DAFTAR / TABLE LIST STYLE
                 let html = `
                 <div class="table-wrapper">
                     <table class="file-list">
@@ -569,21 +537,15 @@
             }
         }
 
-        // --- INTEGRASI SEARCH BAR (FITUR UTAMA) ---
         function jalankanPencarian() {
             let val = document.getElementById('search-input').value.toLowerCase().trim();
-            
             if(navState.level === 1) {
-                // JIKA DI HOME: FILTER DAFTAR FOLDER BRANKAS
                 let filteredFolders = DATA_BRANKAS.filter(b => b.nama.toLowerCase().includes(val));
                 renderFolders(filteredFolders);
             } else {
-                // JIKA DI DALAM FOLDER: FILTER SUBFOLDER & DATA FILE BERKAS
                 let targetSub = DATA_SUBFOLDERS[navState.brankasNama] || [];
                 let filteredSubs = targetSub.filter(sf => sf.namaSub.toLowerCase().includes(val));
-                
                 if(navState.level === 2) renderFolders(filteredSubs, true);
-                
                 let filteredFiles = RAW_ACTIVE_FILES.filter(f => f.nama.toLowerCase().includes(val));
                 renderFiles(filteredFiles);
             }
@@ -602,7 +564,6 @@
 
         function toggleUploadMenu(e) { e.stopPropagation(); document.getElementById('upload-menu').classList.toggle('hidden'); }
         
-        // --- PROSES ACTION UPLOAD & DOWNLOAD ---
         function bukaModalUpload() {
             if(navState.level === 1) return alert("Sila tentukan brankas folder target unggah terlebih dahulu!");
             document.getElementById('lbl-target-upload').innerText = navState.activeFolderName;
@@ -624,15 +585,59 @@
                 let file = files[i];
                 let ext = file.name.split('.').pop();
                 let formatNama = nama ? `${nama}_${tgl || ''}_${navState.activeFolderName}.${ext}` : file.name;
-                
+                let b64 = "";
+                let finalMimeType = file.type || 'application/octet-stream';
+
+                // Jalur Kompresi Gambar Otomatis
+                if (file.type.startsWith('image/')) {
+                    stat.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Mengompres gambar (${i+1}/${files.length})...`;
+                    
+                    b64 = await new Promise((resolve) => {
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function (event) {
+                            let img = new Image();
+                            img.src = event.target.result;
+                            img.onload = function () {
+                                let canvas = document.createElement('canvas');
+                                let ctx = canvas.getContext('2d');
+                                
+                                let MAX_WIDTH = 1200;
+                                let MAX_HEIGHT = 1200;
+                                let width = img.width;
+                                let height = img.height;
+                                
+                                if (width > height) {
+                                    if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+                                } else {
+                                    if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
+                                }
+                                
+                                canvas.width = width;
+                                canvas.height = height;
+                                ctx.drawImage(img, 0, 0, width, height);
+                                
+                                let dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                                resolve(dataUrl.split(',')[1]);
+                            };
+                        };
+                    });
+                    
+                    finalMimeType = 'image/jpeg';
+                    if(!["jpg", "jpeg"].includes(ext.toLowerCase())) {
+                        formatNama = formatNama.substring(0, formatNama.lastIndexOf('.')) + ".jpg";
+                    }
+                } else {
+                    // Jalur Dokumen Normal (PDF/Word/Excel)
+                    stat.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Membaca berkas (${i+1}/${files.length})...`;
+                    b64 = await new Promise(res => {
+                        let r = new FileReader(); r.readAsDataURL(file);
+                        r.onload = e => res(e.target.result.split(',')[1]);
+                    });
+                }
+
                 stat.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Mengunggah (${i+1}/${files.length})...`;
-                
-                let b64 = await new Promise(res => {
-                    let r = new FileReader(); r.readAsDataURL(file);
-                    r.onload = e => res(e.target.result.split(',')[1]);
-                });
-                
-                await fetchAPI("upload", { folderId: navState.activeFolderId, fileName: formatNama, mimeType: file.type || 'application/octet-stream', base64: b64 });
+                await fetchAPI("upload", { folderId: navState.activeFolderId, fileName: formatNama, mimeType: finalMimeType, base64: b64 });
             }
             
             stat.innerText = "Berhasil diunggah!";
@@ -640,7 +645,6 @@
             document.getElementById('up-tanggal').value = '';
             document.getElementById('up-files').value = '';
             btn.disabled = false;
-            
             setTimeout(() => { stat.innerText = ""; tutupModalUpload(); loadFilesFromServer(navState.activeFolderId); }, 1000);
         }
 
@@ -648,7 +652,6 @@
             document.getElementById('loading-msg').classList.remove('hidden');
             let res = await fetchAPI("download", { fileId: id });
             document.getElementById('loading-msg').classList.add('hidden');
-            
             if(res.status === "SUCCESS") {
                 let a = document.createElement('a');
                 a.href = "data:" + res.data.mimeType + ";base64," + res.data.base64;
@@ -663,7 +666,6 @@
             if(res.status === "SUCCESS") loadFilesFromServer(navState.activeFolderId);
         }
 
-        // --- OPERASI SUPERADMIN TAMBAH BRANKAS ---
         function bukaModalBrankas() { document.getElementById('modal-brankas').classList.remove('hidden'); }
         function tutupModalBrankas() { document.getElementById('modal-brankas').classList.add('hidden'); }
         
@@ -679,7 +681,6 @@
             btn.disabled = true; btn.innerText = "Menyimpan...";
             let res = await fetchAPI("addBrankas", { nama: nama, icon: icon, tipe: tipe, target: target });
             alert(res.message);
-            
             btn.disabled = false; btn.innerText = "Simpan Brankas";
             tutupModalBrankas();
             location.reload();
