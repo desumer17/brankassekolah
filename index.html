@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brankas - Google Drive Style</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Brankas - SD Negeri 17 Dauh Puri</title>
     <link rel="icon" type="image/png" href="logo-sekolah.png">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,107 +11,163 @@
         :root {
             --bg: #f8f9fa; --surface: #ffffff; --primary: #0b57d0; --primary-light: #d3e3fd; --text: #1f1f1f; --sub: #444746; --border: #c7c7c7; --hover: #f0f4f9;
         }
-        body { font-family: 'Google Sans', 'Roboto', sans-serif; margin: 0; background: var(--surface); color: var(--text); overflow: hidden; }
+        body { font-family: 'Segoe UI', 'Roboto', sans-serif; margin: 0; background: var(--surface); color: var(--text); overflow: hidden; }
         .hidden { display: none !important; }
         
         /* Layout Grid */
-        #app-container { display: flex; height: 100vh; width: 100vw; }
+        #app-container { display: flex; height: 100vh; width: 100vw; position: relative; }
         
-        /* Sidebar Kiri */
-        #sidebar { width: 250px; background: var(--bg); display: flex; flex-direction: column; padding: 15px 10px; border-right: 1px solid var(--border); transition: 0.3s; z-index: 10; }
-        .brand { display: flex; align-items: center; gap: 10px; padding: 0 15px 20px; font-size: 20px; font-weight: 500; color: var(--sub); }
-        .brand img { width: 35px; }
+        /* Sidebar Kiri (Desktop) */
+        #sidebar { width: 280px; background: var(--bg); display: flex; flex-direction: column; padding: 15px 12px; border-right: 1px solid var(--border); transition: all 0.3s ease; z-index: 999; box-sizing: border-box; }
         
-        /* Tombol "+ Baru" */
-        .btn-new { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 15px 20px; font-size: 14px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 15px; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: max-content; margin-bottom: 20px; transition: 0.2s; position: relative; }
-        .btn-new:hover { box-shadow: 0 4px 6px rgba(0,0,0,0.1); background: var(--hover); }
-        .btn-new i { color: #ea4335; font-size: 20px; }
+        /* CSS BRANDING SIDEBAR (DIPERBARUI AGAR PAS UNTUK NAMA PANJANG) */
+        .brand { display: flex; align-items: center; gap: 10px; padding: 5px 10px 25px; border-bottom: 1px solid var(--border); margin-bottom: 15px; }
+        .brand img { width: 40px; height: auto; }
+        .brand span { font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.2; word-break: break-word; }
         
-        /* Menu Dropdown Unggah */
-        .upload-menu { position: absolute; top: 60px; left: 0; background: var(--surface); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: 1px solid var(--border); padding: 8px 0; min-width: 200px; z-index: 100; text-align: left; }
-        .upload-menu button { width: 100%; text-align: left; background: none; border: none; padding: 10px 20px; font-size: 14px; color: var(--text); cursor: pointer; display: flex; align-items: center; gap: 15px; }
+        /* Tombol "+ Baru" Dropdown */
+        .new-dropdown-wrapper { position: relative; width: max-content; margin-bottom: 15px; padding-left: 5px; }
+        .btn-new { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 12px 24px; font-size: 14px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 15px; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: 0.2s; }
+        .btn-new:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.15); background: var(--hover); }
+        .btn-new img { width: 24px; }
+        
+        .upload-menu { position: absolute; top: 55px; left: 5px; background: var(--surface); border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); border: 1px solid var(--border); padding: 6px 0; min-width: 220px; z-index: 1000; }
+        .upload-menu button { width: 100%; text-align: left; background: none; border: none; padding: 12px 20px; font-size: 14px; color: var(--text); cursor: pointer; display: flex; align-items: center; gap: 12px; }
         .upload-menu button:hover { background: var(--hover); }
+        .upload-menu button i { font-size: 16px; width: 20px; text-align: center; }
 
-        /* Daftar Menu Sidebar */
-        .nav-item { display: flex; align-items: center; gap: 15px; padding: 10px 20px; border-radius: 24px; cursor: pointer; color: var(--text); font-size: 14px; font-weight: 500; transition: 0.2s; margin-bottom: 2px; }
+        /* Menu Navigasi */
+        .nav-item { display: flex; align-items: center; gap: 15px; padding: 12px 20px; border-radius: 24px; cursor: pointer; color: var(--text); font-size: 14px; font-weight: 500; transition: 0.2s; margin-bottom: 4px; }
         .nav-item:hover { background: var(--hover); }
         .nav-item.active { background: var(--primary-light); color: var(--primary); font-weight: bold; }
         .nav-item.active i { color: var(--primary); }
-        .nav-item i { width: 20px; text-align: center; font-size: 16px; color: var(--sub); }
-        .user-info-box { margin-top: auto; padding: 15px; background: var(--hover); border-radius: 12px; font-size: 12px; color: var(--sub); display: flex; justify-content: space-between; align-items: center; }
+        .nav-item i { width: 20px; text-align: center; font-size: 18px; color: var(--sub); }
+        .user-info-box { margin-top: auto; padding: 15px; background: var(--hover); border-radius: 12px; font-size: 13px; color: var(--sub); display: flex; justify-content: space-between; align-items: center; }
 
-        /* Area Utama Kanan (File Explorer) */
-        #main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--surface); border-radius: 16px 0 0 16px; }
+        /* Area Utama (File Explorer) */
+        #main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--surface); }
         
-        /* Top Bar & Breadcrumbs */
-        .top-bar { padding: 15px 25px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .breadcrumbs { font-size: 22px; font-weight: 400; color: var(--text); display: flex; align-items: center; gap: 10px; }
-        .breadcrumbs i { font-size: 14px; color: var(--sub); }
-        .breadcrumbs span { cursor: pointer; padding: 5px 10px; border-radius: 8px; transition: 0.2s; }
+        /* Top Bar dengan Search Bar Terintegrasi */
+        .top-bar { padding: 12px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--surface); gap: 20px; }
+        
+        /* Kolom Pencarian Google Drive Style */
+        .search-container { flex: 1; max-width: 600px; position: relative; display: flex; align-items: center; }
+        .search-container i { position: absolute; left: 16px; color: var(--sub); font-size: 16px; }
+        .search-container input { width: 100%; padding: 12px 16px 12px 48px; border: none; background: #edf2fa; border-radius: 24px; font-size: 15px; color: var(--text); transition: all 0.2s; box-sizing: border-box; }
+        .search-container input:focus { outline: none; background: var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.1); }
+        
+        .top-right-icons { display: flex; align-items: center; gap: 16px; color: var(--sub); font-size: 18px; }
+        .top-right-icons i { cursor: pointer; padding: 8px; border-radius: 50%; transition: 0.2s; }
+        .top-right-icons i:hover { background: var(--hover); color: var(--text); }
+        .top-right-icons i.active { color: var(--primary); background: var(--primary-light); }
+
+        /* Breadcrumbs */
+        .breadcrumb-container { padding: 15px 24px 5px; display: flex; align-items: center; justify-content: space-between; }
+        .breadcrumbs { font-size: 18px; font-weight: 400; color: var(--text); display: flex; align-items: center; gap: 8px; }
+        .breadcrumbs i { font-size: 12px; color: var(--sub); }
+        .breadcrumbs span { cursor: pointer; padding: 4px 8px; border-radius: 6px; transition: 0.2s; }
         .breadcrumbs span:hover { background: var(--hover); }
         
-        /* Area Folder Induk */
-        .explorer-area { padding: 25px; flex: 1; overflow-y: auto; }
-        .section-title { font-size: 14px; font-weight: 500; color: var(--sub); margin: 0 0 15px 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        /* Area Explorer Berkas */
+        .explorer-area { padding: 10px 24px 24px; flex: 1; overflow-y: auto; box-sizing: border-box; }
+        .section-title { font-size: 14px; font-weight: 500; color: var(--sub); margin: 20px 0 12px 0; padding-bottom: 6px; border-bottom: 1px solid #f0f0f0; }
         
-        /* Grid Folder */
-        .folder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
-        .folder-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 15px; display: flex; align-items: center; gap: 15px; cursor: pointer; transition: 0.2s; }
-        .folder-card:hover { background: var(--hover); }
-        .folder-card i { font-size: 20px; color: var(--sub); }
+        /* Tampilan Grid Folder & File */
+        .folder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .folder-card { background: var(--bg); border: 1px solid transparent; border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: 0.2s; box-sizing: border-box; }
+        .folder-card:hover { background: #e9eef6; }
+        .folder-card i { font-size: 22px; color: var(--sub); }
         .folder-card span { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
-        /* List Berkas (File List) */
-        .file-list { width: 100%; border-collapse: collapse; }
-        .file-list th { text-align: left; padding: 10px; font-size: 13px; font-weight: 500; color: var(--sub); border-bottom: 1px solid var(--border); }
-        .file-list td { padding: 12px 10px; font-size: 14px; border-bottom: 1px solid #f0f0f0; cursor: default; }
+        /* Tampilan Mode Grid untuk FILE */
+        .file-grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+        .file-card-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; position: relative; cursor: pointer; transition: 0.2s; box-sizing: border-box; min-height: 120px; justify-content: space-between; }
+        .file-card-box:hover { background: var(--hover); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .file-card-top { display: flex; align-items: flex-start; justify-content: space-between; width: 100%; }
+        .file-card-top i { font-size: 36px; }
+        .file-card-title { font-size: 13px; font-weight: 500; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-all; margin-top: 10px; margin-bottom: auto; }
+        .file-card-meta { font-size: 11px; color: var(--sub); margin-top: 8px; }
+
+        /* Tampilan Mode Tabel/List untuk FILE */
+        .table-wrapper { width: 100%; overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
+        .file-list { width: 100%; border-collapse: collapse; min-width: 500px; }
+        .file-list th { text-align: left; padding: 12px 16px; font-size: 13px; font-weight: 500; color: var(--sub); border-bottom: 1px solid var(--border); background: var(--bg); }
+        .file-list td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid #f0f0f0; }
         .file-list tr:hover td { background: var(--hover); }
-        .file-name-cell { display: flex; align-items: center; gap: 15px; cursor: pointer; }
-        .file-name-cell i { color: var(--primary); font-size: 18px; }
+        .file-name-cell { display: flex; align-items: center; gap: 12px; cursor: pointer; font-weight: 500; }
+        .file-name-cell i { font-size: 18px; }
         
-        /* Context Menu (Titik Tiga) */
-        .action-btn { background: none; border: none; cursor: pointer; padding: 5px 10px; border-radius: 50%; color: var(--sub); transition: 0.2s; position: relative; }
-        .action-btn:hover { background: #e0e0e0; }
-        .context-menu { position: absolute; right: 30px; top: 10px; background: var(--surface); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); border: 1px solid var(--border); z-index: 100; min-width: 150px; overflow: hidden; }
-        .context-menu button { display: block; width: 100%; text-align: left; background: none; border: none; padding: 10px 15px; font-size: 13px; cursor: pointer; color: var(--text); }
+        /* Kancing Titik Tiga & Context Menu */
+        .action-btn { background: none; border: none; cursor: pointer; padding: 8px; border-radius: 50%; color: var(--sub); transition: 0.2s; }
+        .action-btn:hover { background: #e0e0e0; color: var(--text); }
+        .context-menu-wrapper { position: relative; display: inline-block; }
+        .context-menu { position: absolute; right: 0; top: 35px; background: var(--surface); border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.18); border: 1px solid var(--border); z-index: 2000; min-width: 160px; overflow: hidden; }
+        .context-menu button { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: none; border: none; padding: 12px 16px; font-size: 13px; cursor: pointer; color: var(--text); }
         .context-menu button:hover { background: var(--hover); }
-        .context-menu button.danger { color: #d93025; }
+        .context-menu button.danger { color: #b3261e; }
 
-        /* Upload Modal Sederhana */
-        .modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 200; }
-        .modal-box { background: var(--surface); padding: 25px; border-radius: 12px; width: 400px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
-        .modal-box h3 { margin-top: 0; font-weight: 500; }
-        .modal-box input { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid var(--border); border-radius: 6px; box-sizing: border-box; }
-        .btn-primary { background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: 500; width: 100%; margin-top: 10px;}
-        .btn-primary:disabled { background: var(--sub); }
+        /* Modals */
+        .modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; z-index: 5000; backdrop-filter: blur(2px); padding: 15px; box-sizing: border-box; }
+        .modal-box { background: var(--surface); padding: 24px; border-radius: 16px; width: 100%; max-width: 440px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); box-sizing: border-box; }
+        .modal-box h3 { margin-top: 0; font-weight: 500; font-size: 18px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .modal-box input, .modal-box select { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid var(--border); border-radius: 8px; box-sizing: border-box; font-size: 14px; }
+        .modal-box input:focus, .modal-box select:focus { outline: none; border-color: var(--primary); }
+        .modal-buttons { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
+        .btn-modal { padding: 10px 20px; border-radius: 20px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; }
+        .btn-modal.cancel { background: none; color: var(--sub); }
+        .btn-modal.cancel:hover { background: var(--hover); }
+        .btn-modal.confirm { background: var(--primary); color: white; }
+        .btn-modal.confirm:disabled { background: var(--border); cursor: not-allowed; }
 
-        /* Menu Mobile Toggle */
-        .mobile-toggle { display: none; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--sub); padding: 10px; }
-        
+        /* Hambuger & Mobile Overlay */
+        .mobile-toggle { display: none; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--sub); padding: 8px; border-radius: 50%; }
+        .mobile-toggle:hover { background: var(--hover); }
+        #sidebar-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 998; }
+
+        /* RESPONSIVE LAYOUT UNTUK HP (MUTAKHIR) */
         @media (max-width: 768px) {
-            #sidebar { position: fixed; left: -250px; height: 100%; box-shadow: 2px 0 10px rgba(0,0,0,0.1); }
+            #sidebar { position: fixed; left: -280px; top: 0; height: 100%; box-shadow: 4px 0 16px rgba(0,0,0,0.15); border-right: none; }
             #sidebar.open { left: 0; }
+            #sidebar-overlay.open { display: block; }
             .mobile-toggle { display: block; }
-            .file-list th:nth-child(2), .file-list th:nth-child(3), .file-list td:nth-child(2), .file-list td:nth-child(3) { display: none; }
-            .breadcrumbs { font-size: 18px; }
+            .top-bar { padding: 10px 15px; gap: 10px; }
+            .search-container input { padding: 10px 12px 10px 38px; font-size: 14px; }
+            .search-container i { left: 14px; font-size: 14px; }
+            .top-right-icons { font-size: 16px; gap: 8px; }
+            .breadcrumb-container { padding: 10px 15px; }
+            .breadcrumbs { font-size: 16px; }
+            .explorer-area { padding: 10px 15px; }
+            .folder-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .file-grid-layout { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .folder-card { padding: 12px; gap: 10px; border-radius: 8px; }
+            .folder-card span { font-size: 13px; }
+            
+            /* Sembunyikan kolom sekunder tabel di HP */
+            .file-list th:nth-child(2), .file-list th:nth-child(3),
+            .file-list td:nth-child(2), .file-list td:nth-child(3) { display: none; }
         }
         
-        /* LAYOUT LOGIN PISAHAN */
-        #login-page { position: fixed; top:0; left:0; width:100vw; height:100vh; background:#f0f4f9; display: flex; justify-content: center; align-items: center; z-index: 1000; }
-        .login-card { background: white; padding: 40px; border-radius: 16px; text-align: center; width: 320px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #dadce0;}
-        .login-card input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #dadce0; border-radius: 8px; box-sizing: border-box; }
+        /* STYLE HALAMAN LOGIN */
+        #login-page { position: fixed; top:0; left:0; width:100vw; height:100vh; background:#f0f4f9; display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        .login-card { background: white; padding: 40px 30px; border-radius: 24px; text-align: center; width: 100%; max-width: 360px; box-shadow: 0 4px 24px rgba(0,0,0,0.04); border: 1px solid #dadce0; box-sizing: border-box; }
+        .login-card input { width: 100%; padding: 14px; margin-bottom: 12px; border: 1px solid #dadce0; border-radius: 8px; box-sizing: border-box; font-size: 15px; }
+        .login-card input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(11,87,208,0.15); }
+        .btn-login-submit { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 24px; font-weight: 500; font-size: 15px; width: 100%; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+        .btn-login-submit:hover { background: #0a4ebd; }
     </style>
 </head>
 <body>
 
+    <div id="sidebar-overlay" onclick="closeMobileSidebar()"></div>
+
     <div id="login-page">
         <div class="login-card">
-            <img src="logo-sekolah.png" alt="Logo" width="70" style="margin-bottom:10px;">
-            <h2 style="margin:0 0 5px; font-weight:500; font-size:22px;">Brankas Digital</h2>
-            <p style="color:#5f6368; font-size:14px; margin-bottom:25px;">Masuk untuk melanjutkan</p>
-            <input type="text" id="username" placeholder="Username">
+            <img src="logo-sekolah.png" alt="Logo" width="70" style="margin-bottom:15px;">
+            <h2 style="margin:0 0 6px; font-weight:500; font-size:24px; color:var(--text);">Brankas Digital</h2>
+            <p style="color:var(--sub); font-size:14px; margin-bottom:28px; margin-top:0;">Gunakan Akun Guru Anda</p>
+            <input type="text" id="username" placeholder="Username / NIP">
             <input type="password" id="password" placeholder="Password">
-            <button class="btn-primary" id="btn-login" onclick="login()">Selanjutnya</button>
+            <button class="btn-login-submit" id="btn-login" onclick="login()">Masuk</button>
         </div>
     </div>
 
@@ -120,14 +176,18 @@
         <div id="sidebar">
             <div class="brand">
                 <img src="logo-sekolah.png" alt="Logo">
-                <span>Brankas</span>
+                <span>SD Negeri 17 Dauh Puri</span>
             </div>
             
-            <div class="btn-new" onclick="toggleUploadMenu()">
-                <i class="fas fa-plus"></i> Baru
+            <div class="new-dropdown-wrapper">
+                <div class="btn-new" onclick="toggleUploadMenu(event)">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Drive">
+                    <span>Baru</span>
+                </div>
                 <div id="upload-menu" class="upload-menu hidden">
-                    <button onclick="bukaModalUpload()"><i class="fas fa-file-upload"></i> Upload Berkas</button>
-                    <button id="btn-sync" class="hidden" onclick="sinkronServer()"><i class="fas fa-sync"></i> Refresh Server DB</button>
+                    <button onclick="bukaModalUpload()"><i class="fas fa-file-upload" style="color:#188038;"></i> Upload Berkas</button>
+                    <button id="btn-admin-add-brankas" class="hidden" onclick="bukaModalBrankas()"><i class="fas fa-folder-plus" style="color:#1a73e8;"></i> Buat Brankas Baru</button>
+                    <button id="btn-sync" class="hidden" onclick="sinkronServer()"><i class="fas fa-sync-alt" style="color:#ea4335;"></i> Segarkan Server Cache</button>
                 </div>
             </div>
 
@@ -136,84 +196,119 @@
             </div>
             
             <div class="user-info-box">
-                <span id="user-info-text">User</span>
-                <i class="fas fa-sign-out-alt" style="cursor:pointer; color:#d93025;" onclick="location.reload()" title="Keluar"></i>
+                <div style="display:flex; flex-direction:column; overflow:hidden;">
+                    <span id="user-info-text" style="font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">User</span>
+                    <span id="user-role-text" style="font-size:11px; color:var(--sub);">Role</span>
+                </div>
+                <i class="fas fa-sign-out-alt" style="cursor:pointer; color:#b3261e; font-size:16px; padding:5px;" onclick="location.reload()" title="Keluar"></i>
             </div>
         </div>
 
         <div id="main-content">
+            
             <div class="top-bar">
-                <div style="display:flex; align-items:center;">
-                    <button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fas fa-bars"></i></button>
-                    <div class="breadcrumbs" id="breadcrumb-area">
-                        <span onclick="goHome()">Drive Utama</span>
-                    </div>
+                <button class="mobile-toggle" onclick="openMobileSidebar()"><i class="fas fa-bars"></i></button>
+                
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Cari folder atau file dokumen..." oninput="jalankanPencarian()">
                 </div>
-                <div style="display:flex; gap:15px; color:var(--sub);">
-                    <i class="fas fa-question-circle" style="cursor:pointer;"></i>
-                    <i class="fas fa-cog" style="cursor:pointer;"></i>
+                
+                <div class="top-right-icons">
+                    <i id="view-icon-grid" class="fas fa-th-large active" onclick="setViewMode('grid')" title="Tampilan Grid"></i>
+                    <i id="view-icon-list" class="fas fa-list" onclick="setViewMode('list')" title="Tampilan Daftar"></i>
+                </div>
+            </div>
+
+            <div class="breadcrumb-container">
+                <div class="breadcrumbs" id="breadcrumb-area">
+                    <span onclick="goHome()">Drive Utama</span>
                 </div>
             </div>
 
             <div class="explorer-area">
+                <div id="box-folder-section">
+                    <h3 class="section-title" id="title-folders">Daftar Brankas Utama</h3>
+                    <div class="folder-grid" id="folder-container"></div>
+                </div>
                 
-                <h3 class="section-title" id="title-folders">Daftar Brankas Folder</h3>
-                <div class="folder-grid" id="folder-container"></div>
+                <div id="box-file-section" class="hidden">
+                    <h3 class="section-title" id="title-files">Berkas Dokumen</h3>
+                    
+                    <div id="files-render-zone"></div>
+                </div>
                 
-                <h3 class="section-title hidden" id="title-files">Berkas Dokumen</h3>
-                <table class="file-list hidden" id="file-table">
-                    <thead>
-                        <tr>
-                            <th>Nama</th>
-                            <th>Tanggal Diubah</th>
-                            <th>Ukuran</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="file-container"></tbody>
-                </table>
-                <div id="loading-msg" class="hidden" style="text-align:center; color:var(--sub); margin-top:20px;">
-                    <i class="fas fa-spinner fa-spin"></i> Memuat data...
+                <div id="loading-msg" class="hidden" style="text-align:center; color:var(--sub); margin-top:40px; font-size:14px;">
+                    <i class="fas fa-circle-notch fa-spin" style="color:var(--primary); font-size:24px; margin-bottom:10px;"></i>
+                    <div>Sedang memproses dokumen...</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="modal-upload" class="modal hidden">
+    <div id="modal-upload" class="modal hidden" onclick="event.target.id==='modal-upload' && tutupModalUpload()">
         <div class="modal-box">
-            <h3><i class="fas fa-cloud-upload-alt"></i> Upload Berkas</h3>
-            <p style="font-size:12px; color:var(--sub); margin-top:-10px;">Mengunggah ke: <b id="lbl-target-upload"></b></p>
+            <h3><i class="fas fa-cloud-upload-alt" style="color:var(--primary);"></i> Upload Berkas Dokumen</h3>
+            <p style="font-size:12px; color:var(--sub); margin-top:-10px; margin-bottom:20px;">Tujuan unggah: <b id="lbl-target-upload" style="color:var(--text);"></b></p>
             
-            <input type="text" id="up-nama" placeholder="Nama Label Berkas (Cth: RPP B.Indo)">
+            <label style="font-size:12px; font-weight:500; color:var(--sub);">Label/Nama Dokumen:</label>
+            <input type="text" id="up-nama" placeholder="Contoh: RPP Matematika Kelas 4">
+            
+            <label style="font-size:12px; font-weight:500; color:var(--sub);">Tanggal Dokumen:</label>
             <input type="date" id="up-tanggal">
-            <input type="file" id="up-files" multiple>
             
-            <div style="display:flex; gap:10px; margin-top:15px;">
-                <button class="btn-primary" style="background:#f1f3f4; color:#000;" onclick="tutupModalUpload()">Batal</button>
-                <button class="btn-primary" id="btn-submit-upload" onclick="prosesUpload()">Upload</button>
+            <label style="font-size:12px; font-weight:500; color:var(--sub);">Pilih Berkas:</label>
+            <input type="file" id="up-files" multiple style="border:1px dashed var(--border); padding:10px; background:var(--bg);">
+            
+            <div class="modal-buttons">
+                <button class="btn-modal cancel" onclick="tutupModalUpload()">Batal</button>
+                <button class="btn-modal confirm" id="btn-submit-upload" onclick="prosesUpload()">Mulai Unggah</button>
             </div>
-            <div id="upload-status" style="font-size:12px; color:var(--primary); margin-top:10px; text-align:center;"></div>
+            <div id="upload-status" style="font-size:13px; color:var(--primary); margin-top:15px; text-align:center; font-weight:500;"></div>
+        </div>
+    </div>
+
+    <div id="modal-brankas" class="modal hidden" onclick="event.target.id==='modal-brankas' && tutupModalBrankas()">
+        <div class="modal-box">
+            <h3><i class="fas fa-folder-plus" style="color:#1a73e8;"></i> Tambah Brankas Utama</h3>
+            
+            <input type="text" id="add-b-nama" placeholder="Nama Brankas (Cth: SK Pembagian Tugas)">
+            <input type="text" id="add-b-icon" placeholder="Icon FontAwesome (Cth: fa-file-signature)" value="fa-folder">
+            
+            <select id="add-b-tipe" onchange="document.getElementById('add-b-target').placeholder = this.value==='folder'?'ID Folder Google Drive':'Link URL Tujuan External'">
+                <option value="folder">Tipe: Folder Google Drive</option>
+                <option value="link">Tipe: Tautan / Link External</option>
+            </select>
+            
+            <input type="text" id="add-b-target" placeholder="ID Folder Google Drive">
+            
+            <div class="modal-buttons">
+                <button class="btn-modal cancel" onclick="tutupModalBrankas()">Batal</button>
+                <button class="btn-modal confirm" id="btn-submit-brankas" onclick="prosesSimpanBrankas()">Simpan Brankas</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // MASUKKAN URL APPS SCRIPT ANDA DI SINI
+        // MASUKKAN URL APPS SCRIPT ANDA DI SINI (DARI HASIL DEPLOY VERSI BARU)
         const GAS_URL = "https://script.google.com/macros/s/AKfycbyV5030Hr3wFqW1LPWWuoJmH-0IeuiSIa6ngtN7P788USp33BDOXinsJhfMFFWrAgas/exec";
         
         let DATA_BRANKAS = [];
         let DATA_SUBFOLDERS = {};
+        let RAW_ACTIVE_FILES = []; // Tempat menyimpan data file asli sebelum di-filter search
         let currentUser = {};
+        let currentViewMode = localStorage.getItem('drive_view_pref') || 'grid';
         
-        // State Navigasi saat ini
-        let navState = {
-            level: 1, // 1: Home (Brankas Utama), 2: Dalam Brankas (SubFolder/Files), 3: Dalam SubFolder
-            brankasId: "",
-            brankasNama: "",
-            subFolderId: "",
-            subFolderNama: "",
-            activeFolderId: "", // ID Google Drive aktif untuk tujuan upload
-            activeFolderName: ""
-        };
+        let navState = { level: 1, brankasId: "", brankasNama: "", subFolderId: "", subFolderNama: "", activeFolderId: "", activeFolderName: "" };
+
+        function openMobileSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebar-overlay').classList.add('open');
+        }
+        function closeMobileSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebar-overlay').classList.remove('open');
+        }
 
         async function fetchAPI(action, payload = {}) {
             payload.action = action;
@@ -221,191 +316,295 @@
             return await res.json();
         }
 
-        // --- SISTEM LOGIN ---
+        function setViewMode(mode) {
+            currentViewMode = mode;
+            localStorage.setItem('drive_view_pref', mode);
+            document.getElementById('view-icon-grid').classList.toggle('active', mode==='grid');
+            document.getElementById('view-icon-list').classList.toggle('active', mode==='list');
+            if(navState.level > 1) renderFiles(RAW_ACTIVE_FILES);
+        }
+
+        // --- MANAJEMEN ICON DAN WARNA FILE SECARA OTOMATIS ---
+        function getFileIconConfig(filename) {
+            let ext = filename.split('.').pop().toLowerCase();
+            let conf = { icon: "fa-file", color: "#5f6368" }; // Default abu-abu
+            
+            if (["pdf"].includes(ext)) { conf.icon = "fa-file-pdf"; conf.color = "#ea4335"; } // Merah
+            else if (["doc","docx","odt"].includes(ext)) { conf.icon = "fa-file-word"; conf.color = "#1a73e8"; } // Biru
+            else if (["xls","xlsx","ods","csv"].includes(ext)) { conf.icon = "fa-file-excel"; conf.color = "#188038"; } // Hijau
+            else if (["ppt","pptx"].includes(ext)) { conf.icon = "fa-file-powerpoint"; conf.color = "#f4b400"; } // Kuning
+            else if (["jpg","jpeg","png","gif","svg","webp"].includes(ext)) { conf.icon = "fa-file-image"; conf.color = "#fa7b17"; } // Orange
+            else if (["zip","rar","7z","tar"].includes(ext)) { conf.icon = "fa-file-archive"; conf.color = "#af52de"; } // Ungu
+            else if (["mp4","mkv","avi","mov"].includes(ext)) { conf.icon = "fa-file-video"; conf.color = "#e21212"; }
+            
+            return conf;
+        }
+
+        // --- PROSES LOGIN ---
         async function login() {
             let u = document.getElementById('username').value;
             let p = document.getElementById('password').value;
-            if(!u || !p) return;
+            if(!u || !p) return alert("Harap isi username dan password!");
             
             let btn = document.getElementById('btn-login'); 
-            btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i>"; btn.disabled = true;
+            btn.innerHTML = "<i class='fas fa-circle-notch fa-spin'></i> Memeriksa..."; btn.disabled = true;
 
-            let res = await fetchAPI("login", { username: u, password: p });
-            
-            if(res.status === "SUCCESS") {
-                currentUser = res.data.user;
-                DATA_BRANKAS = res.data.brankas;
-                DATA_SUBFOLDERS = res.data.subfolders || {};
+            try {
+                let res = await fetchAPI("login", { username: u, password: p });
+                if(res.status === "SUCCESS") {
+                    currentUser = res.data.user;
+                    DATA_BRANKAS = res.data.brankas;
+                    DATA_SUBFOLDERS = res.data.subfolders || {};
 
-                if(currentUser.personalFolder) {
-                    DATA_BRANKAS.unshift({nama: "Brankas Pribadi", icon: "fa-user-lock", tipe: "folder", target: currentUser.personalFolder});
+                    if(currentUser.personalFolder) {
+                        DATA_BRANKAS.unshift({nama: "Brankas Pribadi", icon: "fa-user-lock", tipe: "folder", target: currentUser.personalFolder});
+                    }
+
+                    document.getElementById('login-page').classList.add('hidden');
+                    document.getElementById('app-container').classList.remove('hidden');
+                    document.getElementById('user-info-text').innerText = currentUser.nama;
+                    document.getElementById('user-role-text').innerText = currentUser.peran;
+                    
+                    if(currentUser.peran === "SuperAdmin") {
+                        document.getElementById('btn-admin-add-brankas').classList.remove('hidden');
+                        document.getElementById('btn-sync').classList.remove('hidden');
+                    }
+
+                    setViewMode(currentViewMode);
+                    goHome();
+                } else { 
+                    alert(res.message); btn.innerText = "Masuk"; btn.disabled = false;
                 }
-
-                document.getElementById('login-page').classList.add('hidden');
-                document.getElementById('app-container').classList.remove('hidden');
-                document.getElementById('user-info-text').innerText = `${currentUser.nama}`;
-                
-                if(currentUser.peran === "SuperAdmin") document.getElementById('btn-sync').classList.remove('hidden');
-
-                goHome(); // Render halaman utama
-            } else { 
-                alert(res.message); btn.innerText = "Selanjutnya"; btn.disabled = false;
+            } catch(e) {
+                alert("Gagal terhubung ke server Apps Script!"); btn.innerText = "Masuk"; btn.disabled = false;
             }
         }
 
-        // --- NAVIGASI HOME (LEVEL 1) ---
+        // --- DRIVE UTAMA (LEVEL 1) ---
         function goHome() {
             navState = { level: 1, activeFolderId: "", activeFolderName: "" };
+            closeMobileSidebar();
+            document.getElementById('search-input').value = "";
             document.getElementById('breadcrumb-area').innerHTML = `<span onclick="goHome()">Drive Utama</span>`;
-            document.getElementById('title-folders').innerText = "Daftar Brankas Drive";
-            document.getElementById('title-files').classList.add('hidden');
-            document.getElementById('file-table').classList.add('hidden');
+            document.getElementById('box-folder-section').classList.remove('hidden');
+            document.getElementById('title-folders').innerText = "Daftar Brankas Utama";
+            document.getElementById('box-file-section').classList.add('hidden');
             
-            let fContainer = document.getElementById('folder-container');
-            fContainer.innerHTML = "";
-            
-            DATA_BRANKAS.forEach(b => {
-                fContainer.innerHTML += `
-                    <div class="folder-card" onclick="openBrankas('${b.target}', '${b.nama}', '${b.tipe}')">
-                        <i class="fas ${b.icon || 'fa-folder'}"></i>
-                        <span>${b.nama}</span>
-                    </div>`;
-            });
+            renderFolders(DATA_BRANKAS);
         }
 
-        // --- NAVIGASI DALAM BRANKAS (LEVEL 2) ---
+        // --- MASUK KE BRANKAS (LEVEL 2) ---
         async function openBrankas(targetId, nama, tipe) {
             if(tipe === "link") return window.open(targetId, '_blank');
             
-            navState.level = 2;
-            navState.brankasId = targetId;
-            navState.brankasNama = nama;
-            navState.activeFolderId = targetId;
-            navState.activeFolderName = nama;
+            navState.level = 2; navState.brankasId = targetId; navState.brankasNama = nama;
+            navState.activeFolderId = targetId; navState.activeFolderName = nama;
             
+            closeMobileSidebar();
+            document.getElementById('search-input').value = "";
             updateBreadcrumb();
-            renderSubFolders(nama);
-            await loadFiles(targetId);
+            
+            // Render SubFolder jika ada
+            let listSubs = DATA_SUBFOLDERS[nama] || [];
+            renderFolders(listSubs, true);
+            
+            await loadFilesFromServer(targetId);
         }
 
-        // --- NAVIGASI DALAM SUBFOLDER (LEVEL 3) ---
+        // --- MASUK KE SUB-FOLDER (LEVEL 3) ---
         async function openSubFolder(subId, subNama) {
-            navState.level = 3;
-            navState.subFolderId = subId;
-            navState.subFolderNama = subNama;
-            navState.activeFolderId = subId;
-            navState.activeFolderName = subNama;
+            navState.level = 3; navState.subFolderId = subId; navState.subFolderNama = subNama;
+            navState.activeFolderId = subId; navState.activeFolderName = subNama;
             
+            document.getElementById('search-input').value = "";
             updateBreadcrumb();
             
-            // Sembunyikan grid subfolder jika sudah masuk ke dalam
-            document.getElementById('title-folders').classList.add('hidden');
+            document.getElementById('box-folder-section').classList.add('hidden');
             document.getElementById('folder-container').innerHTML = "";
             
-            await loadFiles(subId);
+            await loadFilesFromServer(subId);
         }
 
-        // --- KOMPONEN BREADCRUMB ---
         function updateBreadcrumb() {
             let html = `<span onclick="goHome()">Drive Utama</span>`;
             if (navState.level >= 2) {
-                html += ` <i class="fas fa-chevron-right"></i> <span onclick="openBrankas('${navState.brankasId}', '${navState.brankasNama}', 'folder')">${navState.brankasNama}</span>`;
+                html += ` <i class="fas fa-chevron-right" style="font-size:10px;"></i> <span onclick="openBrankas('${navState.brankasId}', '${navState.brankasNama}', 'folder')">${navState.brankasNama}</span>`;
             }
             if (navState.level === 3) {
-                html += ` <i class="fas fa-chevron-right"></i> <span>${navState.subFolderNama}</span>`;
+                html += ` <i class="fas fa-chevron-right" style="font-size:10px;"></i> <span style="color:var(--sub); cursor:default;">${navState.subFolderNama}</span>`;
             }
             document.getElementById('breadcrumb-area').innerHTML = html;
         }
 
-        // --- KOMPONEN SUBFOLDER ---
-        function renderSubFolders(indukNama) {
-            let listSubs = DATA_SUBFOLDERS[indukNama];
+        // --- CORE RENDER FOLDER ---
+        function renderFolders(arr, isSubFolder = false) {
             let fContainer = document.getElementById('folder-container');
-            
-            if(listSubs && listSubs.length > 0) {
-                document.getElementById('title-folders').classList.remove('hidden');
-                document.getElementById('title-folders').innerText = "Sub-Folder";
-                fContainer.innerHTML = "";
-                listSubs.forEach(sf => {
-                    fContainer.innerHTML += `
-                        <div class="folder-card" onclick="openSubFolder('${sf.idDrive}', '${sf.namaSub}')">
-                            <i class="fas fa-folder" style="color:var(--primary);"></i>
-                            <span>${sf.namaSub}</span>
-                        </div>`;
-                });
-            } else {
-                document.getElementById('title-folders').classList.add('hidden');
-                fContainer.innerHTML = "";
+            if(!arr || arr.length === 0) {
+                if(isSubFolder) { document.getElementById('box-folder-section').classList.add('hidden'); }
+                else { fContainer.innerHTML = "<p style='padding:20px; color:var(--sub);'>Tidak ada folder brankas.</p>"; }
+                return;
             }
+            
+            document.getElementById('box-folder-section').classList.remove('hidden');
+            document.getElementById('title-folders').innerText = isSubFolder ? "Sub-Folder Berkas" : "Daftar Brankas Utama";
+            fContainer.innerHTML = "";
+            
+            arr.forEach(f => {
+                let folderNama = isSubFolder ? f.namaSub : f.nama;
+                let fid = isSubFolder ? f.idDrive : f.target;
+                let iconClass = isSubFolder ? "fa-folder" : (f.icon || "fa-folder");
+                let colorStyle = isSubFolder ? "style='color:#4285f4;'" : "";
+                let fnClick = isSubFolder ? `openSubFolder('${fid}', '${folderNama}')` : `openBrankas('${fid}', '${folderNama}', '${f.tipe}')`;
+                
+                fContainer.innerHTML += `
+                    <div class="folder-card" onclick="${fnClick}">
+                        <i class="fas ${iconClass}" ${colorStyle}></i>
+                        <span>${folderNama}</span>
+                    </div>`;
+            });
         }
 
-        // --- LOAD FILES & RENDER TABLE ---
-        async function loadFiles(folderId) {
-            document.getElementById('title-files').classList.remove('hidden');
-            document.getElementById('file-table').classList.remove('hidden');
-            let tbody = document.getElementById('file-container');
+        // --- SISTEM DOWNLOAD & LOAD BERKAS ---
+        async function loadFilesFromServer(folderId) {
+            document.getElementById('box-file-section').classList.remove('hidden');
+            let zone = document.getElementById('files-render-zone');
             let loading = document.getElementById('loading-msg');
             
-            tbody.innerHTML = "";
+            zone.innerHTML = "";
             loading.classList.remove('hidden');
             
-            let res = await fetchAPI("getFiles", { folderId: folderId });
-            loading.classList.add('hidden');
-            
-            if(res.status === "SUCCESS") {
-                let sorted = [...res.data].sort((a, b) => a.nama.localeCompare(b.nama));
-                if(sorted.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--sub); padding:30px;">Folder ini kosong. Letakkan berkas di sini.</td></tr>`;
-                    return;
-                }
+            try {
+                let res = await fetchAPI("getFiles", { folderId: folderId });
+                loading.classList.add('hidden');
                 
-                sorted.forEach(f => {
-                    let btnHapus = (currentUser.peran === "SuperAdmin" || navState.brankasNama === "Brankas Pribadi") 
-                        ? `<button class="danger" onclick="deleteFile('${f.id}')"><i class="fas fa-trash"></i> Hapus</button>` : "";
-                    
-                    let tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>
-                            <div class="file-name-cell" onclick="window.open('${f.url}', '_blank')">
-                                <i class="fas fa-file-pdf"></i> ${f.nama}
-                            </div>
-                        </td>
-                        <td>${f.date || '-'}</td>
-                        <td>${f.size || '-'}</td>
-                        <td style="text-align:right;">
-                            <button class="action-btn" onclick="toggleContextMenu('${f.id}')"><i class="fas fa-ellipsis-v"></i></button>
-                            <div id="ctx-${f.id}" class="context-menu hidden">
-                                <button onclick="downloadFile('${f.id}', '${f.nama}')"><i class="fas fa-download"></i> Download</button>
-                                ${btnHapus}
-                            </div>
-                        </td>`;
-                    tbody.appendChild(tr);
-                });
+                if(res.status === "SUCCESS") {
+                    RAW_ACTIVE_FILES = res.data.sort((a,b) => a.nama.localeCompare(b.nama));
+                    renderFiles(RAW_ACTIVE_FILES);
+                }
+            } catch(e) {
+                loading.classList.add('hidden');
+                zone.innerHTML = "<p style='color:#b3261e; padding:20px;'>Gagal mengambil data file berkas.</p>";
             }
         }
 
-        function toggleContextMenu(id) {
-            document.querySelectorAll('.context-menu').forEach(el => {
-                if(el.id !== `ctx-${id}`) el.classList.add('hidden');
-            });
+        function renderFiles(filesArray) {
+            let zone = document.getElementById('files-render-zone');
+            if(!filesArray || filesArray.length === 0) {
+                zone.innerHTML = `<div style="text-align:center; color:var(--sub); padding:40px 10px; font-size:14px; border:1px dashed var(--border); border-radius:12px;">Folder ini kosong. Sila upload berkas baru menggunakan kancing (+ Baru).</div>`;
+                return;
+            }
+
+            if(currentViewMode === 'grid') {
+                // RENDER MODEL KOTAK / GRID STYLE
+                let html = `<div class="file-grid-layout">`;
+                filesArray.forEach(f => {
+                    let cfg = getFileIconConfig(f.nama);
+                    let actionDom = (currentUser.peran === "SuperAdmin" || navState.brankasNama === "Brankas Pribadi") 
+                        ? `<button class="danger" onclick="deleteFile('${f.id}')"><i class="fas fa-trash-alt"></i> Hapus</button>` : "";
+                    
+                    html += `
+                        <div class="file-card-box">
+                            <div class="file-card-top" onclick="window.open('${f.url}', '_blank')">
+                                <i class="fas ${cfg.icon}" style="color:${cfg.color};"></i>
+                                <div class="file-card-title">${f.nama}</div>
+                            </div>
+                            <div class="file-card-meta">
+                                <div>${f.size}</div>
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                                    <span>${f.date}</span>
+                                    <div class="context-menu-wrapper">
+                                        <button class="action-btn" onclick="toggleCtxMenu(event, '${f.id}')"><i class="fas fa-ellipsis-v"></i></button>
+                                        <div id="ctx-${f.id}" class="context-menu hidden">
+                                            <button onclick="downloadFile('${f.id}')"><i class="fas fa-download"></i> Download</button>
+                                            ${actionDom}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+                html += `</div>`;
+                zone.innerHTML = html;
+            } else {
+                // RENDER MODEL DAFTAR / TABLE LIST STYLE
+                let html = `
+                <div class="table-wrapper">
+                    <table class="file-list">
+                        <thead>
+                            <tr>
+                                <th>Nama Berkas</th>
+                                <th>Tanggal Diunggah</th>
+                                <th>Ukuran</th>
+                                <th style="width:50px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+                
+                filesArray.forEach(f => {
+                    let cfg = getFileIconConfig(f.nama);
+                    let actionDom = (currentUser.peran === "SuperAdmin" || navState.brankasNama === "Brankas Pribadi") 
+                        ? `<button class="danger" onclick="deleteFile('${f.id}')"><i class="fas fa-trash-alt"></i> Hapus</button>` : "";
+                    
+                    html += `
+                        <tr>
+                            <td>
+                                <div class="file-name-cell" onclick="window.open('${f.url}', '_blank')">
+                                    <i class="fas ${cfg.icon}" style="color:${cfg.color};"></i>
+                                    <span>${f.nama}</span>
+                                </div>
+                            </td>
+                            <td>${f.date}</td>
+                            <td>${f.size}</td>
+                            <td style="text-align:right; position:relative;">
+                                <button class="action-btn" onclick="toggleCtxMenu(event, '${f.id}')"><i class="fas fa-ellipsis-v"></i></button>
+                                <div id="ctx-${f.id}" class="context-menu hidden" style="top:30px;">
+                                    <button onclick="downloadFile('${f.id}')"><i class="fas fa-download"></i> Download</button>
+                                    ${actionDom}
+                                </div>
+                            </td>
+                        </tr>`;
+                });
+                html += `</tbody></table></div>`;
+                zone.innerHTML = html;
+            }
+        }
+
+        // --- INTEGRASI SEARCH BAR (FITUR UTAMA) ---
+        function jalankanPencarian() {
+            let val = document.getElementById('search-input').value.toLowerCase().trim();
+            
+            if(navState.level === 1) {
+                // JIKA DI HOME: FILTER DAFTAR FOLDER BRANKAS
+                let filteredFolders = DATA_BRANKAS.filter(b => b.nama.toLowerCase().includes(val));
+                renderFolders(filteredFolders);
+            } else {
+                // JIKA DI DALAM FOLDER: FILTER SUBFOLDER & DATA FILE BERKAS
+                let targetSub = DATA_SUBFOLDERS[navState.brankasNama] || [];
+                let filteredSubs = targetSub.filter(sf => sf.namaSub.toLowerCase().includes(val));
+                
+                if(navState.level === 2) renderFolders(filteredSubs, true);
+                
+                let filteredFiles = RAW_ACTIVE_FILES.filter(f => f.nama.toLowerCase().includes(val));
+                renderFiles(filteredFiles);
+            }
+        }
+
+        function toggleCtxMenu(e, id) {
+            e.stopPropagation();
+            document.querySelectorAll('.context-menu').forEach(el => { if(el.id !== `ctx-${id}`) el.classList.add('hidden'); });
             document.getElementById(`ctx-${id}`).classList.toggle('hidden');
         }
-        
-        // Hilangkan konteks menu jika klik di sembarang tempat
-        document.addEventListener('click', function(e) {
-            if(!e.target.closest('.action-btn') && !e.target.closest('.context-menu')) {
-                document.querySelectorAll('.context-menu').forEach(el => el.classList.add('hidden'));
-            }
-            if(!e.target.closest('.btn-new')) {
-                document.getElementById('upload-menu').classList.add('hidden');
-            }
+
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.context-menu').forEach(el => el.classList.add('hidden'));
+            document.getElementById('upload-menu').classList.add('hidden');
         });
 
-        // --- SISTEM UPLOAD BARU ---
-        function toggleUploadMenu() { document.getElementById('upload-menu').classList.toggle('hidden'); }
+        function toggleUploadMenu(e) { e.stopPropagation(); document.getElementById('upload-menu').classList.toggle('hidden'); }
         
+        // --- PROSES ACTION UPLOAD & DOWNLOAD ---
         function bukaModalUpload() {
-            if(navState.level === 1) return alert("Pilih brankas atau folder tujuan terlebih dahulu!");
+            if(navState.level === 1) return alert("Sila tentukan brankas folder target unggah terlebih dahulu!");
             document.getElementById('lbl-target-upload').innerText = navState.activeFolderName;
             document.getElementById('modal-upload').classList.remove('hidden');
         }
@@ -413,46 +612,43 @@
 
         async function prosesUpload() {
             let files = document.getElementById('up-files').files;
-            let nama = document.getElementById('up-nama').value;
+            let nama = document.getElementById('up-nama').value.trim();
             let tgl = document.getElementById('up-tanggal').value;
             let btn = document.getElementById('btn-submit-upload');
             let stat = document.getElementById('upload-status');
             
-            if(files.length === 0) return alert("Pilih file!");
+            if(files.length === 0) return alert("Pilih berkas file!");
             btn.disabled = true;
             
             for(let i=0; i<files.length; i++) {
                 let file = files[i];
                 let ext = file.name.split('.').pop();
-                let formatNama = nama ? `${nama}_${tgl}_${navState.activeFolderName}.${ext}` : file.name;
+                let formatNama = nama ? `${nama}_${tgl || ''}_${navState.activeFolderName}.${ext}` : file.name;
                 
-                stat.innerText = `Mengunggah (${i+1}/${files.length})...`;
-                let b64 = await processFile(file);
+                stat.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Mengunggah (${i+1}/${files.length})...`;
+                
+                let b64 = await new Promise(res => {
+                    let r = new FileReader(); r.readAsDataURL(file);
+                    r.onload = e => res(e.target.result.split(',')[1]);
+                });
+                
                 await fetchAPI("upload", { folderId: navState.activeFolderId, fileName: formatNama, mimeType: file.type || 'application/octet-stream', base64: b64 });
             }
             
-            stat.innerText = "Selesai!";
+            stat.innerText = "Berhasil diunggah!";
             document.getElementById('up-nama').value = '';
             document.getElementById('up-tanggal').value = '';
             document.getElementById('up-files').value = '';
             btn.disabled = false;
             
-            setTimeout(() => {
-                stat.innerText = "";
-                tutupModalUpload();
-                loadFiles(navState.activeFolderId);
-            }, 1000);
+            setTimeout(() => { stat.innerText = ""; tutupModalUpload(); loadFilesFromServer(navState.activeFolderId); }, 1000);
         }
 
-        function processFile(file) {
-            return new Promise((resolve) => {
-                let r = new FileReader(); r.readAsDataURL(file);
-                r.onload = e => resolve(e.target.result.split(',')[1]);
-            });
-        }
-
-        async function downloadFile(id, nama) {
+        async function downloadFile(id) {
+            document.getElementById('loading-msg').classList.remove('hidden');
             let res = await fetchAPI("download", { fileId: id });
+            document.getElementById('loading-msg').classList.add('hidden');
+            
             if(res.status === "SUCCESS") {
                 let a = document.createElement('a');
                 a.href = "data:" + res.data.mimeType + ";base64," + res.data.base64;
@@ -461,14 +657,37 @@
         }
 
         async function deleteFile(id) {
-            if(!confirm("Buang file ini ke sampah?")) return;
+            if(!confirm("Kirim berkas ini ke tong sampah?")) return;
+            document.getElementById('loading-msg').classList.remove('hidden');
             let res = await fetchAPI("deleteFile", { fileId: id });
-            if(res.status === "SUCCESS") loadFiles(navState.activeFolderId);
+            if(res.status === "SUCCESS") loadFilesFromServer(navState.activeFolderId);
+        }
+
+        // --- OPERASI SUPERADMIN TAMBAH BRANKAS ---
+        function bukaModalBrankas() { document.getElementById('modal-brankas').classList.remove('hidden'); }
+        function tutupModalBrankas() { document.getElementById('modal-brankas').classList.add('hidden'); }
+        
+        async function prosesSimpanBrankas() {
+            let nama = document.getElementById('add-b-nama').value.trim();
+            let icon = document.getElementById('add-b-icon').value.trim();
+            let tipe = document.getElementById('add-b-tipe').value;
+            let target = document.getElementById('add-b-target').value.trim();
+            let btn = document.getElementById('btn-submit-brankas');
+
+            if(!nama || !target) return alert("Kolom nama dan target tidak boleh kosong!");
+            
+            btn.disabled = true; btn.innerText = "Menyimpan...";
+            let res = await fetchAPI("addBrankas", { nama: nama, icon: icon, tipe: tipe, target: target });
+            alert(res.message);
+            
+            btn.disabled = false; btn.innerText = "Simpan Brankas";
+            tutupModalBrankas();
+            location.reload();
         }
 
         async function sinkronServer() {
             let res = await fetchAPI("clearCache");
-            if(res.status === "SUCCESS") { alert("Sukses tersinkron!"); location.reload(); }
+            if(res.status === "SUCCESS") { alert("Cache database dikosongkan! Aplikasi dimuat ulang."); location.reload(); }
         }
 
         if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
