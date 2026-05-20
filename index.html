@@ -481,7 +481,7 @@
                     
                     html += `
                         <div class="file-card-box">
-                            <div class="file-card-top" onclick="window.open('${f.url}', '_blank')">
+                            <div class="file-card-top" onclick="downloadFile('${f.id}')">
                                 <i class="fas ${cfg.icon}" style="color:${cfg.color};"></i>
                                 <div class="file-card-title">${f.nama}</div>
                             </div>
@@ -492,7 +492,7 @@
                                     <div class="context-menu-wrapper">
                                         <button class="action-btn" onclick="toggleCtxMenu(event, '${f.id}')"><i class="fas fa-ellipsis-v"></i></button>
                                         <div id="ctx-${f.id}" class="context-menu hidden">
-                                            <button onclick="downloadFile('${f.id}')"><i class="fas fa-download"></i> Download</button>
+                                            <button onclick="downloadFile('${f.id}')"><i class="fas fa-external-link-alt"></i> Buka Berkas</button>
                                             ${actionDom}
                                         </div>
                                     </div>
@@ -524,7 +524,7 @@
                     html += `
                         <tr>
                             <td>
-                                <div class="file-name-cell" onclick="window.open('${f.url}', '_blank')">
+                                <div class="file-name-cell" onclick="downloadFile('${f.id}')">
                                     <i class="fas ${cfg.icon}" style="color:${cfg.color};"></i>
                                     <span>${f.nama}</span>
                                 </div>
@@ -534,7 +534,7 @@
                             <td style="text-align:right; position:relative;">
                                 <button class="action-btn" onclick="toggleCtxMenu(event, '${f.id}')"><i class="fas fa-ellipsis-v"></i></button>
                                 <div id="ctx-${f.id}" class="context-menu hidden" style="top:30px;">
-                                    <button onclick="downloadFile('${f.id}')"><i class="fas fa-download"></i> Download</button>
+                                    <button onclick="downloadFile('${f.id}')"><i class="fas fa-external-link-alt"></i> Buka Berkas</button>
                                     ${actionDom}
                                 </div>
                             </td>
@@ -655,20 +655,17 @@
         }
 
         /* =========================================================================
-           PERBAIKAN FITUR DOWNLOAD UTK MENYEMBUNYIKAN PERINGATAN CHROME DANGEROUS FILE
+           SOLUSI FIX BERKAS GOOGLE DRIVE VIEW PREVIEW (ANTI-BLOCKED CHROME)
            ========================================================================= */
         async function downloadFile(id) {
-            // Tampilkan animasi loading di dashboard Anda
             document.getElementById('loading-msg').classList.remove('hidden');
             
-            // Solusi Mutakhir: Gunakan Link API Export/Download Resmi Google Drive
-            // Melewati skema Base64 lokal agar tidak diprotes sistem keamanan Google Chrome
-            let downloadUrl = `https://drive.google.com/uc?export=download&id=${id}`;
+            // Menggunakan tautan pratinjau resmi Google Drive web view
+            let previewUrl = `https://drive.google.com/file/d/${id}/view?usp=drivesdk`;
             
-            // Picu unduhan di tab baru
-            window.open(downloadUrl, '_blank');
+            // Membuka berkas di tab baru
+            window.open(previewUrl, '_blank');
             
-            // Sembunyikan kembali status loading setelah jeda 1 detik
             setTimeout(() => {
                 document.getElementById('loading-msg').classList.add('hidden');
             }, 1000);
