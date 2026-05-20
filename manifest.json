@@ -1,0 +1,24 @@
+{
+  "short_name": "Brankas",
+  "name": "Brankas Digital SDN 17 Dauh Puri",
+  "description": "Sistem Aplikasi Brankas Digital SDN 17 Dauh Puri",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#00a884",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "logo-sekolah.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "logo-sekolah.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}
