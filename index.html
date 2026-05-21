@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="stJnJR4TC53_bP0hzGsez_Sfc77jNAgkRgNZPKwUEfo" />
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Brankas Digital - SD Negeri 17 Dauh Puri</title>
     <link class="image" rel="icon" type="image/png" href="logo-sekolah.png">
@@ -11,21 +10,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg: #f4f6f9;             
-            --surface: #ffffff;        
-            --primary: #0f766e;        
-            --primary-light: #ccfbf1;  
-            --text: #0f172a;           
-            --sub: #64748b;            
-            --border: #e2e8f0;         
-            --hover: #f1f5f9;          
+            --bg: #f4f6f9; --surface: #ffffff; --primary: #0f766e; --primary-light: #ccfbf1; 
+            --text: #0f172a; --sub: #64748b; --border: #e2e8f0; --hover: #f1f5f9;
         }
         
         body { font-family: 'Segoe UI', 'Roboto', sans-serif; margin: 0; background: var(--surface); color: var(--text); overflow: hidden; }
         .hidden { display: none !important; }
         
         #app-container { display: flex; height: 100vh; width: 100vw; position: relative; }
-        
         #sidebar { width: 280px; background: var(--bg); display: flex; flex-direction: column; padding: 15px 12px; border-right: 1px solid var(--border); transition: all 0.3s ease; z-index: 999; box-sizing: border-box; }
         
         .brand { display: flex; align-items: center; gap: 10px; padding: 5px 10px 25px; border-bottom: 1px solid var(--border); margin-bottom: 15px; }
@@ -40,26 +32,25 @@
         .upload-menu { position: absolute; top: 55px; left: 5px; background: var(--surface); border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.1); border: 1px solid var(--border); padding: 6px 0; min-width: 220px; z-index: 1000; }
         .upload-menu button { width: 100%; text-align: left; background: none; border: none; padding: 12px 20px; font-size: 14px; color: var(--text); cursor: pointer; display: flex; align-items: center; gap: 12px; }
         .upload-menu button:hover { background: var(--hover); }
-        .upload-menu button i { font-size: 16px; width: 20px; text-align: center; }
-
+        
         .nav-item { display: flex; align-items: center; gap: 15px; padding: 12px 20px; border-radius: 24px; cursor: pointer; color: var(--text); font-size: 14px; font-weight: 500; transition: 0.2s; margin-bottom: 4px; }
         .nav-item:hover { background: var(--hover); }
         .nav-item.active { background: var(--primary-light); color: var(--primary); font-weight: bold; }
         .nav-item.active i { color: var(--primary); }
         .nav-item i { width: 20px; text-align: center; font-size: 18px; color: var(--sub); }
-        .user-info-box { margin-top: auto; padding: 15px; background: var(--hover); border-radius: 12px; font-size: 13px; color: var(--sub); display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+        
+        .user-info-box { margin-top: auto; padding: 12px 15px; background: var(--hover); border-radius: 12px; font-size: 13px; color: var(--sub); display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+        .user-actions { display: flex; gap: 10px; align-items: center; }
 
         #main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--surface); }
-        
         .top-bar { padding: 12px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--surface); gap: 20px; }
-        
         .search-container { flex: 1; max-width: 600px; position: relative; display: flex; align-items: center; }
         .search-container i { position: absolute; left: 16px; color: var(--sub); font-size: 16px; }
         .search-container input { width: 100%; padding: 12px 16px 12px 48px; border: 1px solid var(--border); background: var(--bg); border-radius: 24px; font-size: 15px; color: var(--text); transition: all 0.2s; box-sizing: border-box; }
         .search-container input:focus { outline: none; background: var(--surface); border-color: var(--primary); box-shadow: 0 0 0 3px rgba(15,118,110,0.1); }
         
-        .top-right-icons { display: flex; align-items: center; gap: 16px; color: var(--sub); font-size: 18px; }
-        .top-right-icons i { cursor: pointer; padding: 8px; border-radius: 50%; transition: 0.2s; }
+        .top-right-icons { display: flex; align-items: center; gap: 12px; color: var(--sub); font-size: 18px; }
+        .top-right-icons i { cursor: pointer; padding: 8px; border-radius: 8px; transition: 0.2s; }
         .top-right-icons i:hover { background: var(--hover); color: var(--text); }
         .top-right-icons i.active { color: var(--primary); background: var(--primary-light); }
 
@@ -72,28 +63,41 @@
         .explorer-area { padding: 10px 24px 24px; flex: 1; overflow-y: auto; box-sizing: border-box; }
         .section-title { font-size: 13px; font-weight: 600; color: var(--sub); margin: 20px 0 12px 0; padding-bottom: 6px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 0.5px; }
         
-        .folder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; margin-bottom: 20px; }
-        .folder-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: 0.2s; box-sizing: border-box; }
-        .folder-card:hover { border-color: var(--primary); background: var(--bg); transform: translateY(-1px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
-        .folder-card i { font-size: 22px; color: var(--primary); }
-        .folder-card span { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        /* === TAMPILAN DINAMIS GRID, LARGE, LIST === */
         
-        .file-grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
-        .file-card-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; position: relative; cursor: pointer; transition: 0.2s; box-sizing: border-box; min-height: 130px; justify-content: space-between; }
-        .file-card-box:hover { border-color: var(--primary); background: var(--bg); box-shadow: 0 4px 12px rgba(0,0,0,0.03); transform: translateY(-1px); }
+        /* 1. Tampilan Standard Grid (Mode Grid) */
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .grid-layout .item-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: 0.2s; box-sizing: border-box; }
+        .grid-layout .file-card { flex-direction: column; min-height: 120px; align-items: flex-start; justify-content: space-between; padding: 12px; }
+        
+        /* 2. Tampilan Large Grid (Mode Large) */
+        .large-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 24px; }
+        .large-layout .item-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px 24px; display: flex; align-items: center; gap: 20px; cursor: pointer; transition: 0.2s; box-sizing: border-box; }
+        .large-layout .file-card { flex-direction: column; min-height: 160px; align-items: flex-start; justify-content: space-between; padding: 18px; }
+        .large-layout .item-card i { font-size: 32px; }
+        .large-layout .file-card i { font-size: 54px; }
+        .large-layout .item-card span, .large-layout .file-card-title { font-size: 16px; font-weight: 600; }
+        
+        /* Global Hover Effect untuk Card */
+        .item-card:hover { border-color: var(--primary); background: var(--bg); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15,118,110,0.05); }
+        .item-card i.fa-folder, .item-card i.fa-folder-open, .item-card i.fa-user-lock { color: var(--primary) !important; font-size: 24px; }
+
         .file-card-top { display: flex; align-items: flex-start; justify-content: space-between; width: 100%; }
         .file-card-top i { font-size: 36px; }
-        .file-card-title { font-size: 13px; font-weight: 500; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-all; margin-top: 10px; margin-bottom: auto; color: var(--text); }
-        .file-card-meta { font-size: 11px; color: var(--sub); margin-top: 8px; }
+        .file-card-title { font-size: 13px; font-weight: 500; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-all; margin-top: 10px; margin-bottom: auto; color: var(--text); width: 100%; }
+        .file-card-meta { font-size: 11px; color: var(--sub); margin-top: 8px; width: 100%; }
 
-        .table-wrapper { width: 100%; overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
-        .file-list { width: 100%; border-collapse: collapse; min-width: 500px; }
-        .file-list th { text-align: left; padding: 12px 16px; font-size: 13px; font-weight: 600; color: var(--sub); border-bottom: 1px solid var(--border); background: var(--bg); }
-        .file-list td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
-        .file-list tr:hover td { background: var(--hover); }
-        .file-name-cell { display: flex; align-items: center; gap: 12px; cursor: pointer; font-weight: 500; }
-        .file-name-cell i { font-size: 18px; }
+        /* 3. Tampilan List (Mode List/Tabel) */
+        .table-wrapper { width: 100%; overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); margin-bottom: 20px; }
+        .list-table { width: 100%; border-collapse: collapse; min-width: 500px; }
+        .list-table th { text-align: left; padding: 12px 16px; font-size: 13px; font-weight: 600; color: var(--sub); border-bottom: 1px solid var(--border); background: var(--bg); }
+        .list-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
+        .list-table tr:hover td { background: var(--hover); }
+        .name-cell { display: flex; align-items: center; gap: 12px; cursor: pointer; font-weight: 500; }
+        .name-cell i { font-size: 18px; }
+        .name-cell i.fa-folder, .name-cell i.fa-user-lock { color: var(--primary) !important; }
         
+        /* Context Menu */
         .action-btn { background: none; border: none; cursor: pointer; padding: 8px; border-radius: 50%; color: var(--sub); transition: 0.2s; }
         .action-btn:hover { background: var(--border); color: var(--text); }
         .context-menu-wrapper { position: relative; display: inline-block; }
@@ -102,12 +106,15 @@
         .context-menu button:hover { background: var(--hover); }
         .context-menu button.danger { color: #b3261e; }
 
+        /* Modals */
         .modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15,23,42,0.3); display: flex; justify-content: center; align-items: center; z-index: 5000; backdrop-filter: blur(4px); padding: 15px; box-sizing: border-box; }
-        .modal-box { background: var(--surface); padding: 24px; border-radius: 16px; width: 100%; max-width: 440px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); box-sizing: border-box; border: 1px solid var(--border); }
+        .modal-box { background: var(--surface); padding: 24px; border-radius: 16px; width: 100%; max-width: 460px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); box-sizing: border-box; border: 1px solid var(--border); }
         .modal-box h3 { margin-top: 0; font-weight: 600; font-size: 18px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; color: var(--text); }
         .modal-box input, .modal-box select { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid var(--border); border-radius: 8px; box-sizing: border-box; font-size: 14px; background: var(--bg); color: var(--text); }
         .modal-box input:focus, .modal-box select:focus { outline: none; border-color: var(--primary); background: var(--surface); }
-        .modal-buttons { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
+        .form-row { display: flex; gap: 10px; }
+        .form-row > div { flex: 1; }
+        .modal-buttons { display: flex; gap: 10px; margin-top: 15px; justify-content: flex-end; }
         .btn-modal { padding: 10px 20px; border-radius: 20px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; }
         .btn-modal.cancel { background: none; color: var(--sub); }
         .btn-modal.cancel:hover { background: var(--hover); }
@@ -115,6 +122,7 @@
         .btn-modal.confirm:hover { background: #0d5a54; }
         .btn-modal.confirm:disabled { background: var(--border); cursor: not-allowed; }
 
+        /* Mobile Responsive */
         .mobile-toggle { display: none; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--sub); padding: 8px; border-radius: 50%; }
         .mobile-toggle:hover { background: var(--hover); }
         #sidebar-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.3); z-index: 998; }
@@ -127,24 +135,21 @@
             .top-bar { padding: 10px 15px; gap: 10px; }
             .search-container input { padding: 10px 12px 10px 38px; font-size: 14px; }
             .search-container i { left: 14px; font-size: 14px; }
-            .top-right-icons { font-size: 16px; gap: 8px; }
+            .top-right-icons { font-size: 16px; gap: 4px; }
             .breadcrumb-container { padding: 10px 15px; }
-            .breadcrumbs { font-size: 16px; }
             .explorer-area { padding: 10px 15px; }
-            .folder-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .file-grid-layout { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .folder-card { padding: 12px; gap: 10px; border-radius: 8px; }
-            .folder-card span { font-size: 13px; }
-            .file-list th:nth-child(2), .file-list th:nth-child(3),
-            .file-list td:nth-child(2), .file-list td:nth-child(3) { display: none; }
+            .grid-layout, .large-layout { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .item-card { padding: 12px; gap: 10px; border-radius: 8px; }
+            .list-table th:nth-child(2), .list-table th:nth-child(3),
+            .list-table td:nth-child(2), .list-table td:nth-child(3) { display: none; }
         }
         
         #login-page { position: fixed; top:0; left:0; width:100vw; height:100vh; background: linear-gradient(135deg, #e0f2fe 0%, #f1f5f9 100%); display: flex; justify-content: center; align-items: center; z-index: 9999; flex-direction: column; }
-        .login-card { background: white; padding: 40px 30px; border-radius: 24px; text-align: center; width: 100%; max-width: 360px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05); border: 1px solid var(--border); box-sizing: border-box; }
+        .login-card { background: white; padding: 40px 30px; border-radius: 24px; text-align: center; width: 100%; max-width: 360px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); border: 1px solid var(--border); box-sizing: border-box; }
         .login-card input { width: 100%; padding: 14px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 15px; background: #f8fafc; }
         .login-card input:focus { outline: none; border-color: var(--primary); background: #ffffff; box-shadow: 0 0 0 3px rgba(15,118,110,0.15); }
-        .btn-login-submit { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 24px; font-weight: 600; font-size: 15px; width: 100%; cursor: pointer; margin-top: 10px; transition: 0.2s; box-shadow: 0 4px 6px -1px rgba(15,118,110,0.2); }
-        .btn-login-submit:hover { background: #0d5a54; transform: translateY(-1px); }
+        .btn-login-submit { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 24px; font-weight: 600; font-size: 15px; width: 100%; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+        .btn-login-submit:hover { background: #0d5a54; }
         .login-footer-copyright { margin-top: 16px; text-align: center; font-size: 12px; color: var(--sub); font-weight: 400; letter-spacing: 0.3px; }
     </style>
 </head>
@@ -162,7 +167,7 @@
             <button class="btn-login-submit" id="btn-login" onclick="login()">Masuk Sistem</button>
         </div>
         <div class="login-footer-copyright">
-            &copy; 2026 <b>3D Creative</b>. All Rights Reserved.
+            &copy; <script>document.write(new Date().getFullYear())</script> <b>3D Creative</b>. All Rights Reserved.
         </div>
     </div>
 
@@ -194,7 +199,10 @@
                     <span id="user-info-text" style="font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">User</span>
                     <span id="user-role-text" style="font-size:11px; color:var(--sub);">Role</span>
                 </div>
-                <i class="fas fa-sign-out-alt" style="cursor:pointer; color:#b3261e; font-size:16px; padding:5px;" onclick="location.reload()" title="Keluar"></i>
+                <div class="user-actions">
+                    <i class="fas fa-key" style="cursor:pointer; color:var(--primary); font-size:16px;" onclick="bukaModalSandi()" title="Ubah Kata Sandi"></i>
+                    <i class="fas fa-sign-out-alt" style="cursor:pointer; color:#b3261e; font-size:16px;" onclick="location.reload()" title="Keluar"></i>
+                </div>
             </div>
         </div>
 
@@ -203,11 +211,12 @@
                 <button class="mobile-toggle" onclick="openMobileSidebar()"><i class="fas fa-bars"></i></button>
                 <div class="search-container">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="search-input" placeholder="Cari folder atau nama file berkas..." oninput="jalankanPencarian()">
+                    <input type="text" id="search-input" placeholder="Cari cerdas (Ketik nama, kegiatan, atau tahun)..." oninput="jalankanPencarian()">
                 </div>
                 <div class="top-right-icons">
-                    <i id="view-icon-grid" class="fas fa-th-large active" onclick="setViewMode('grid')" title="Tampilan Grid"></i>
-                    <i id="view-icon-list" class="fas fa-list" onclick="setViewMode('list')" title="Tampilan Daftar"></i>
+                    <i id="view-icon-list" class="fas fa-list" onclick="setViewMode('list')" title="Tampilan Daftar (List)"></i>
+                    <i id="view-icon-grid" class="fas fa-th-large active" onclick="setViewMode('grid')" title="Tampilan Sedang (Grid)"></i>
+                    <i id="view-icon-large" class="fas fa-table-cells-large" onclick="setViewMode('large')" title="Tampilan Besar (Large)"></i>
                 </div>
             </div>
 
@@ -220,7 +229,7 @@
             <div class="explorer-area">
                 <div id="box-folder-section">
                     <h3 class="section-title" id="title-folders">Daftar Brankas Utama</h3>
-                    <div class="folder-grid" id="folder-container"></div>
+                    <div id="folder-container"></div>
                 </div>
                 
                 <div id="box-file-section" class="hidden">
@@ -239,22 +248,53 @@
     <div id="modal-upload" class="modal hidden" onclick="event.target.id==='modal-upload' && tutupModalUpload()">
         <div class="modal-box">
             <h3><i class="fas fa-cloud-upload-alt" style="color:var(--primary);"></i> Upload Berkas Dokumen</h3>
-            <p style="font-size:12px; color:var(--sub); margin-top:-10px; margin-bottom:20px;">Tujuan unggah: <b id="lbl-target-upload" style="color:var(--text);"></b></p>
+            <p style="font-size:12px; color:var(--sub); margin-top:-10px; margin-bottom:15px;">Tujuan unggah: <b id="lbl-target-upload" style="color:var(--text);"></b></p>
             
-            <label style="font-size:12px; font-weight:500; color:var(--sub);">Label/Nama Dokumen:</label>
-            <input type="text" id="up-nama" placeholder="Contoh: RPP Matematika Kelas 4">
+            <div class="form-row">
+                <div>
+                    <label style="font-size:12px; font-weight:500; color:var(--sub);">Tahun:</label>
+                    <input type="number" id="up-tahun" placeholder="Cth: 2026" oninput="generatePreviewName()">
+                </div>
+                <div>
+                    <label style="font-size:12px; font-weight:500; color:var(--sub);">Kegiatan/Jenis:</label>
+                    <input type="text" id="up-kegiatan" placeholder="Cth: PPDB" oninput="generatePreviewName()">
+                </div>
+            </div>
+
+            <label style="font-size:12px; font-weight:500; color:var(--sub);">Nama Berkas:</label>
+            <input type="text" id="up-namaberkas" placeholder="Cth: SK Kepanitiaan" oninput="generatePreviewName()">
             
-            <label style="font-size:12px; font-weight:500; color:var(--sub);">Tanggal Dokumen:</label>
-            <input type="date" id="up-tanggal">
+            <label style="font-size:12px; font-weight:500; color:var(--sub);">Keterangan Lengkap (Opsional):</label>
+            <input type="text" id="up-keterangan" placeholder="Cth: Revisi 2 / Semester Genap" oninput="generatePreviewName()">
             
-            <label style="font-size:12px; font-weight:500; color:var(--sub);">Pilih Berkas:</label>
-            <input type="file" id="up-files" multiple style="border:1px dashed var(--border); padding:10px; background:var(--bg);">
+            <label style="font-size:12px; font-weight:500; color:var(--sub);">Pilih Berkas Komputer/HP:</label>
+            <input type="file" id="up-files" multiple style="border:1px dashed var(--border); padding:10px; background:var(--bg);" onchange="generatePreviewName()">
             
+            <div style="background:var(--hover); padding:10px; border-radius:6px; margin-top:5px;">
+                <span style="font-size:11px; color:var(--sub);">Hasil Nama File:</span><br>
+                <code id="preview-nama-file" style="font-size:12px; color:var(--primary); font-weight:600;">[Otomatis terbentuk disini]</code>
+            </div>
+
             <div class="modal-buttons">
                 <button class="btn-modal cancel" onclick="tutupModalUpload()">Batal</button>
                 <button class="btn-modal confirm" id="btn-submit-upload" onclick="prosesUpload()">Mulai Unggah</button>
             </div>
             <div id="upload-status" style="font-size:13px; color:var(--primary); margin-top:15px; text-align:center; font-weight:500;"></div>
+        </div>
+    </div>
+
+    <div id="modal-sandi" class="modal hidden" onclick="event.target.id==='modal-sandi' && tutupModalSandi()">
+        <div class="modal-box" style="max-width:360px;">
+            <h3><i class="fas fa-lock" style="color:var(--primary);"></i> Ubah Kata Sandi</h3>
+            <p style="font-size:12px; color:var(--sub); margin-top:-10px; margin-bottom:15px;">Sandi baru akan berlaku untuk login berikutnya.</p>
+            
+            <input type="password" id="sandi-baru" placeholder="Masukkan Sandi Baru">
+            <input type="password" id="sandi-konfirmasi" placeholder="Ketik Ulang Sandi Baru">
+            
+            <div class="modal-buttons">
+                <button class="btn-modal cancel" onclick="tutupModalSandi()">Batal</button>
+                <button class="btn-modal confirm" id="btn-submit-sandi" onclick="prosesUbahSandi()">Simpan Sandi</button>
+            </div>
         </div>
     </div>
 
@@ -284,7 +324,6 @@
         let currentUser = {};
         let currentViewMode = localStorage.getItem('drive_view_pref') || 'grid';
         let navState = { level: 1, brankasId: "", brankasNama: "", subFolderId: "", subFolderNama: "", activeFolderId: "", activeFolderName: "" };
-        let searchTimeout = null; // Sistem jeda ketikan (Debounce)
 
         function openMobileSidebar() {
             document.getElementById('sidebar').classList.add('open');
@@ -301,12 +340,16 @@
             return await res.json();
         }
 
+        // FUNGSI DINAMIS UPDATE ICON & RENDER ULANG VIEW
         function setViewMode(mode) {
             currentViewMode = mode;
             localStorage.setItem('drive_view_pref', mode);
-            document.getElementById('view-icon-grid').classList.toggle('active', mode==='grid');
             document.getElementById('view-icon-list').classList.toggle('active', mode==='list');
-            if(navState.level > 1 || document.getElementById('search-input').value.trim() !== "") renderFiles(RAW_ACTIVE_FILES);
+            document.getElementById('view-icon-grid').classList.toggle('active', mode==='grid');
+            document.getElementById('view-icon-large').classList.toggle('active', mode==='large');
+            
+            // Render ulang baik folder maupun file berdasarkan view mode terbaru
+            jalankanPencarian(); 
         }
 
         function getFileIconConfig(filename) {
@@ -334,6 +377,8 @@
                 let res = await fetchAPI("login", { username: u, password: p });
                 if(res.status === "SUCCESS") {
                     currentUser = res.data.user;
+                    currentUser.username = u; // Menyimpan ID user untuk fitur ubah sandi
+
                     DATA_BRANKAS = res.data.brankas;
                     DATA_SUBFOLDERS = res.data.subfolders || {};
 
@@ -350,6 +395,9 @@
                         document.getElementById('btn-admin-add-brankas').classList.remove('hidden');
                         document.getElementById('btn-sync').classList.remove('hidden');
                     }
+
+                    // Set angka tahun berjalan otomatis
+                    document.getElementById('up-tahun').value = new Date().getFullYear();
 
                     setViewMode(currentViewMode);
                     goHome();
@@ -405,6 +453,7 @@
             document.getElementById('breadcrumb-area').innerHTML = html;
         }
 
+        /* RENDER FOLDERS DENGAN VIEW DINAMIS */
         function renderFolders(arr, isSubFolder = false) {
             let fContainer = document.getElementById('folder-container');
             if(!arr || arr.length === 0) {
@@ -412,28 +461,52 @@
                 else { fContainer.innerHTML = "<p style='padding:20px; color:var(--sub);'>Tidak ada folder brankas.</p>"; }
                 return;
             }
+            
             document.getElementById('box-folder-section').classList.remove('hidden');
             document.getElementById('title-folders').innerText = isSubFolder ? "Sub-Folder Berkas" : "Daftar Brankas Utama";
-            fContainer.innerHTML = "";
             
-            arr.forEach(f => {
-                let folderNama = isSubFolder ? f.namaSub : f.nama;
-                let fid = isSubFolder ? f.idDrive : f.target;
-                let iconClass = isSubFolder ? "fa-folder" : (f.icon || "fa-folder");
-                let colorStyle = `style='color:var(--primary);'`;
-                let fnClick = isSubFolder ? `openSubFolder('${fid}', '${folderNama}')` : `openBrankas('${fid}', '${folderNama}', '${f.tipe}')`;
-                
-                fContainer.innerHTML += `
-                    <div class="folder-card" onclick="${fnClick}">
-                        <i class="fas ${iconClass}" ${colorStyle}></i>
-                        <span>${folderNama}</span>
-                    </div>`;
-            });
+            // Pemisahan Tampilan Folder
+            if(currentViewMode === 'list') {
+                let html = `<div class="table-wrapper"><table class="list-table"><tbody>`;
+                arr.forEach(f => {
+                    let folderNama = isSubFolder ? f.namaSub : f.nama;
+                    let fid = isSubFolder ? f.idDrive : f.target;
+                    let iconClass = isSubFolder ? "fa-folder" : (f.icon || "fa-folder");
+                    let fnClick = isSubFolder ? `openSubFolder('${fid}', '${folderNama}')` : `openBrankas('${fid}', '${folderNama}', '${f.tipe}')`;
+                    
+                    html += `
+                        <tr>
+                            <td>
+                                <div class="name-cell" onclick="${fnClick}">
+                                    <i class="fas ${iconClass}"></i> <span>${folderNama}</span>
+                                </div>
+                            </td>
+                        </tr>`;
+                });
+                html += `</tbody></table></div>`;
+                fContainer.innerHTML = html;
+            } else {
+                let gridClass = currentViewMode === 'large' ? 'large-layout' : 'grid-layout';
+                let html = `<div class="${gridClass}">`;
+                arr.forEach(f => {
+                    let folderNama = isSubFolder ? f.namaSub : f.nama;
+                    let fid = isSubFolder ? f.idDrive : f.target;
+                    let iconClass = isSubFolder ? "fa-folder" : (f.icon || "fa-folder");
+                    let fnClick = isSubFolder ? `openSubFolder('${fid}', '${folderNama}')` : `openBrankas('${fid}', '${folderNama}', '${f.tipe}')`;
+                    
+                    html += `
+                        <div class="item-card" onclick="${fnClick}">
+                            <i class="fas ${iconClass}"></i>
+                            <span>${folderNama}</span>
+                        </div>`;
+                });
+                html += `</div>`;
+                fContainer.innerHTML = html;
+            }
         }
 
         async function loadFilesFromServer(folderId) {
             document.getElementById('box-file-section').classList.remove('hidden');
-            document.getElementById('title-files').innerText = "Berkas Dokumen";
             let zone = document.getElementById('files-render-zone');
             let loading = document.getElementById('loading-msg');
             zone.innerHTML = "";
@@ -452,33 +525,68 @@
             }
         }
 
+        /* RENDER FILES DENGAN VIEW DINAMIS */
         function renderFiles(filesArray) {
             let zone = document.getElementById('files-render-zone');
             if(!filesArray || filesArray.length === 0) {
-                zone.innerHTML = `<div style="text-align:center; color:var(--sub); padding:40px 10px; font-size:14px; border:1px dashed var(--border); border-radius:12px;">Folder ini kosong atau berkas tidak ditemukan.</div>`;
+                zone.innerHTML = `<div style="text-align:center; color:var(--sub); padding:40px 10px; font-size:14px; border:1px dashed var(--border); border-radius:12px;">Folder ini kosong. Sila upload berkas baru menggunakan kancing (+ Baru).</div>`;
                 return;
             }
 
-            if(currentViewMode === 'grid') {
-                let html = `<div class="file-grid-layout">`;
+            if(currentViewMode === 'list') {
+                let html = `
+                <div class="table-wrapper">
+                    <table class="list-table">
+                        <thead>
+                            <tr>
+                                <th>Nama Berkas</th>
+                                <th>Tanggal Diunggah</th>
+                                <th>Ukuran</th>
+                                <th style="width:50px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+                
                 filesArray.forEach(f => {
                     let cfg = getFileIconConfig(f.nama);
-                    let actionDom = (currentUser.peran === "SuperAdmin" || navState.brankasNama === "Brankas Pribadi" || f.lokasiFolder === "Brankas Pribadi") 
+                    let actionDom = (currentUser.peran === "SuperAdmin" || navState.brankasNama === "Brankas Pribadi") 
                         ? `<button class="danger" onclick="deleteFile('${f.id}')"><i class="fas fa-trash-alt"></i> Hapus</button>` : "";
                     
-                    // JIKA ADA DATA LOKASI FOLDER (DARI PENCARIAN GLOBAL), TAMPILKAN BADGE
-                    let lokasiBadge = f.lokasiFolder ? `
-                        <div style="font-size:11px; color:var(--primary); font-weight:600; margin-top:5px; background:var(--primary-light); padding:2px 6px; border-radius:4px; width:max-content; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${f.lokasiFolder}">
-                            <i class="fas fa-folder-open"></i> ${f.lokasiFolder}
-                        </div>` : "";
-
                     html += `
-                        <div class="file-card-box">
+                        <tr>
+                            <td>
+                                <div class="name-cell" onclick="downloadFile('${f.id}')">
+                                    <i class="fas ${cfg.icon}" style="color:${cfg.color};"></i>
+                                    <span>${f.nama}</span>
+                                </div>
+                            </td>
+                            <td>${f.date}</td>
+                            <td>${f.size}</td>
+                            <td style="text-align:right; position:relative;">
+                                <button class="action-btn" onclick="toggleCtxMenu(event, '${f.id}')"><i class="fas fa-ellipsis-v"></i></button>
+                                <div id="ctx-${f.id}" class="context-menu hidden" style="top:30px;">
+                                    <button onclick="downloadFile('${f.id}')"><i class="fas fa-external-link-alt"></i> Buka Berkas</button>
+                                    ${actionDom}
+                                </div>
+                            </td>
+                        </tr>`;
+                });
+                html += `</tbody></table></div>`;
+                zone.innerHTML = html;
+            } else {
+                let gridClass = currentViewMode === 'large' ? 'large-layout' : 'grid-layout';
+                let html = `<div class="${gridClass}">`;
+                filesArray.forEach(f => {
+                    let cfg = getFileIconConfig(f.nama);
+                    let actionDom = (currentUser.peran === "SuperAdmin" || navState.brankasNama === "Brankas Pribadi") 
+                        ? `<button class="danger" onclick="deleteFile('${f.id}')"><i class="fas fa-trash-alt"></i> Hapus</button>` : "";
+                    
+                    html += `
+                        <div class="item-card file-card">
                             <div class="file-card-top" onclick="downloadFile('${f.id}')">
                                 <i class="fas ${cfg.icon}" style="color:${cfg.color};"></i>
                                 <div class="file-card-title">${f.nama}</div>
                             </div>
-                            ${lokasiBadge}
                             <div class="file-card-meta">
                                 <div>${f.size}</div>
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
@@ -496,109 +604,29 @@
                 });
                 html += `</div>`;
                 zone.innerHTML = html;
-            } else {
-                let html = `
-                <div class="table-wrapper">
-                    <table class="file-list">
-                        <thead>
-                            <tr>
-                                <th>Nama Berkas</th>
-                                ${filesArray[0].lokasiFolder ? '<th>Lokasi Folder</th>' : ''}
-                                <th>Tanggal Diunggah</th>
-                                <th>Ukuran</th>
-                                <th style="width:50px;"></th>
-                            </tr>
-                        </thead>
-                        <tbody>`;
-                
-                filesArray.forEach(f => {
-                    let cfg = getFileIconConfig(f.nama);
-                    let actionDom = (currentUser.peran === "SuperAdmin" || navState.brankasNama === "Brankas Pribadi" || f.lokasiFolder === "Brankas Pribadi") 
-                        ? `<button class="danger" onclick="deleteFile('${f.id}')"><i class="fas fa-trash-alt"></i> Hapus</button>` : "";
-                    
-                    let lokasiTd = f.lokasiFolder ? `<td style="color:var(--primary); font-weight:500;"><i class="fas fa-folder-open"></i> ${f.lokasiFolder}</td>` : "";
-
-                    html += `
-                        <tr>
-                            <td>
-                                <div class="file-name-cell" onclick="downloadFile('${f.id}')">
-                                    <i class="fas ${cfg.icon}" style="color:${cfg.color};"></i>
-                                    <span>${f.nama}</span>
-                                </div>
-                            </td>
-                            ${lokasiTd}
-                            <td>${f.date}</td>
-                            <td>${f.size}</td>
-                            <td style="text-align:right; position:relative;">
-                                <button class="action-btn" onclick="toggleCtxMenu(event, '${f.id}')"><i class="fas fa-ellipsis-v"></i></button>
-                                <div id="ctx-${f.id}" class="context-menu hidden" style="top:30px;">
-                                    <button onclick="downloadFile('${f.id}')"><i class="fas fa-external-link-alt"></i> Buka Berkas</button>
-                                    ${actionDom}
-                                </div>
-                            </td>
-                        </tr>`;
-                });
-                html += `</tbody></table></div>`;
-                zone.innerHTML = html;
             }
         }
 
-        // SISTEM SELECTION FILTER CERDAS (DILENGKAPI PENCARIAN REKURSIF GLOBAL)
-        function jalankanPencarian() {
-            let val = document.getElementById('search-input').value.toLowerCase().trim();
-            clearTimeout(searchTimeout);
-            
-            if(val === "") {
-                if(navState.level === 1) goHome();
-                else if(navState.level === 2) openBrankas(navState.brankasId, navState.brankasNama, 'folder');
-                else openSubFolder(navState.subFolderId, navState.subFolderNama);
-                return;
-            }
+        /* PENCARIAN CERDAS & DINAMIS (FUZZY SEARCH) */
+        function isFuzzyMatch(namaItem, query) {
+            let terms = query.toLowerCase().trim().split(/\s+/); // Pecah berdasarkan spasi
+            let target = namaItem.toLowerCase();
+            // Akan me-return TRUE jika SEMUA potongan kata kunci ada di dalam nama item
+            return terms.every(term => target.includes(term));
+        }
 
+        function jalankanPencarian() {
+            let val = document.getElementById('search-input').value;
             if(navState.level === 1) {
-                // 1. Cari lokal kartu folder utama dulu biar instan keliatan
-                let filteredFolders = DATA_BRANKAS.filter(b => b.nama.toLowerCase().includes(val));
+                let filteredFolders = DATA_BRANKAS.filter(b => isFuzzyMatch(b.nama, val));
                 renderFolders(filteredFolders);
-                
-                // 2. Beri jeda ketikan 700ms, lalu bongkar isi folder & subfolder secara global ke server Google
-                if(val.length >= 3) {
-                    searchTimeout = setTimeout(() => {
-                        pencarianGlobalServer(val);
-                    }, 700);
-                }
             } else {
-                // Jika sedang membuka folder level 2/3, filter file di folder aktif tersebut secara instan
                 let targetSub = DATA_SUBFOLDERS[navState.brankasNama] || [];
-                let filteredSubs = targetSub.filter(sf => sf.namaSub.toLowerCase().includes(val));
+                let filteredSubs = targetSub.filter(sf => isFuzzyMatch(sf.namaSub, val));
                 if(navState.level === 2) renderFolders(filteredSubs, true);
                 
-                let filteredFiles = RAW_ACTIVE_FILES.filter(f => f.nama.toLowerCase().includes(val));
+                let filteredFiles = RAW_ACTIVE_FILES.filter(f => isFuzzyMatch(f.nama, val));
                 renderFiles(filteredFiles);
-            }
-        }
-
-        // AMBIL DATA DARI SERVER UNTUK PENCARIAN MENDALAM (DEEP SEARCH)
-        async function pencarianGlobalServer(keyword) {
-            let zone = document.getElementById('files-render-zone');
-            let loading = document.getElementById('loading-msg');
-            let fileSection = document.getElementById('box-file-section');
-            
-            fileSection.classList.remove('hidden');
-            document.getElementById('title-files').innerText = `Hasil Pencarian Global: "${keyword}"`;
-            zone.innerHTML = "";
-            loading.classList.remove('hidden');
-            document.getElementById('loading-text').innerText = `Membongkar seluruh subfolder untuk kata kunci "${keyword}"...`;
-            
-            try {
-                let res = await fetchAPI("globalSearch", { keyword: keyword, personalFolder: currentUser.personalFolder || "" });
-                loading.classList.add('hidden');
-                if(res.status === "SUCCESS") {
-                    RAW_ACTIVE_FILES = res.data;
-                    renderFiles(RAW_ACTIVE_FILES);
-                }
-            } catch(e) {
-                loading.classList.add('hidden');
-                zone.innerHTML = "<p style='color:#b3261e; padding:20px;'>Gagal memproses pencarian mendalam.</p>";
             }
         }
 
@@ -619,13 +647,32 @@
             if(navState.level === 1) return alert("Sila tentukan brankas folder target unggah terlebih dahulu!");
             document.getElementById('lbl-target-upload').innerText = navState.activeFolderName;
             document.getElementById('modal-upload').classList.remove('hidden');
+            generatePreviewName(); // Memicu update visual nama otomatis
         }
         function tutupModalUpload() { document.getElementById('modal-upload').classList.add('hidden'); }
 
+        // FUNGSI PREVIEW NAMA FILE TERSTRUKTUR
+        function generatePreviewName() {
+            let thn = document.getElementById('up-tahun').value.trim() || 'Tahun';
+            let giat = document.getElementById('up-kegiatan').value.trim() || 'Kegiatan';
+            let nm = document.getElementById('up-namaberkas').value.trim() || 'NamaBerkas';
+            let ket = document.getElementById('up-keterangan').value.trim() || 'Keterangan';
+            
+            let files = document.getElementById('up-files').files;
+            let ext = files.length > 0 ? "." + files[0].name.split('.').pop() : ".ext";
+            
+            // Format: Tahun_Kegiatan_NamaBerkas_Keterangan.ext
+            let finalName = `${thn}_${giat}_${nm}_${ket}${ext}`;
+            document.getElementById('preview-nama-file').innerText = finalName;
+        }
+
         async function prosesUpload() {
             let files = document.getElementById('up-files').files;
-            let nama = document.getElementById('up-nama').value.trim();
-            let tgl = document.getElementById('up-tanggal').value;
+            let thn = document.getElementById('up-tahun').value.trim() || 'Tahun';
+            let giat = document.getElementById('up-kegiatan').value.trim() || 'Kegiatan';
+            let nm = document.getElementById('up-namaberkas').value.trim() || 'NamaBerkas';
+            let ket = document.getElementById('up-keterangan').value.trim();
+            
             let btn = document.getElementById('btn-submit-upload');
             let stat = document.getElementById('upload-status');
             
@@ -636,51 +683,34 @@
                 let file = files[i];
                 let ext = file.name.split('.').pop();
                 
-                // PENGAMAN JANGKA PANJANG: Ganti spasi jadi underscore (_)
-                let rawFormatNama = nama ? `${nama}_${tgl || ''}_${navState.activeFolderName}.${ext}` : file.name;
-                let formatNama = rawFormatNama.replace(/\s+/g, '_');
+                // Rakit nama baku dan otomatis ubah semua spasi menjadi garis bawah (_)
+                   let rawCustomName = ket ? `${thn}_${giat}_${nm}_${ket}` : `${thn}_${giat}_${nm}`;
+                // Ekspresi / \s+/g artinya mencari semua jenis spasi/jarak dan menggantinya dengan _
+                   let customName = rawCustomName.replace(/\s+/g, '_'); 
+                   let formatNama = `${customName}.${ext}`;
                 
                 let b64 = "";
                 let finalMimeType = file.type || 'application/octet-stream';
 
                 if (file.type.startsWith('image/')) {
                     stat.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Mengompres gambar (${i+1}/${files.length})...`;
-                    
                     b64 = await new Promise((resolve) => {
                         let reader = new FileReader();
                         reader.readAsDataURL(file);
                         reader.onload = function (event) {
-                            let img = new Image();
-                            img.src = event.target.result;
+                            let img = new Image(); img.src = event.target.result;
                             img.onload = function () {
-                                let canvas = document.createElement('canvas');
-                                let ctx = canvas.getContext('2d');
-                                
-                                let MAX_WIDTH = 1200;
-                                let MAX_HEIGHT = 1200;
-                                let width = img.width;
-                                let height = img.height;
-                                
-                                if (width > height) {
-                                    if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-                                } else {
-                                    if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
-                                }
-                                
-                                canvas.width = width;
-                                canvas.height = height;
-                                ctx.drawImage(img, 0, 0, width, height);
-                                
-                                let dataUrl = canvas.toDataURL('image/jpeg', 0.7);
-                                resolve(dataUrl.split(',')[1]);
+                                let canvas = document.createElement('canvas'); let ctx = canvas.getContext('2d');
+                                let MAX_W = 1200; let MAX_H = 1200; let w = img.width; let h = img.height;
+                                if (w > h) { if (w > MAX_W) { h *= MAX_W / w; w = MAX_W; } } 
+                                else { if (h > MAX_H) { w *= MAX_H / h; h = MAX_H; } }
+                                canvas.width = w; canvas.height = h; ctx.drawImage(img, 0, 0, w, h);
+                                resolve(canvas.toDataURL('image/jpeg', 0.7).split(',')[1]);
                             };
                         };
                     });
-                    
                     finalMimeType = 'image/jpeg';
-                    if(!["jpg", "jpeg"].includes(ext.toLowerCase())) {
-                        formatNama = formatNama.substring(0, formatNama.lastIndexOf('.')) + ".jpg";
-                    }
+                    if(!["jpg", "jpeg"].includes(ext.toLowerCase())) formatNama = `${customName}.jpg`;
                 } else {
                     stat.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Membaca berkas (${i+1}/${files.length})...`;
                     b64 = await new Promise(res => {
@@ -694,9 +724,12 @@
             }
             
             stat.innerText = "Berhasil diunggah!";
-            document.getElementById('up-nama').value = '';
-            document.getElementById('up-tanggal').value = '';
+            document.getElementById('up-kegiatan').value = '';
+            document.getElementById('up-namaberkas').value = '';
+            document.getElementById('up-keterangan').value = '';
             document.getElementById('up-files').value = '';
+            generatePreviewName();
+            
             btn.disabled = false;
             setTimeout(() => { stat.innerText = ""; tutupModalUpload(); loadFilesFromServer(navState.activeFolderId); }, 1000);
         }
@@ -712,12 +745,31 @@
             if(!confirm("Kirim berkas ini ke tong sampah?")) return;
             document.getElementById('loading-msg').classList.remove('hidden');
             let res = await fetchAPI("deleteFile", { fileId: id });
+            if(res.status === "SUCCESS") loadFilesFromServer(navState.activeFolderId);
+        }
+
+        /* FITUR GANTI SANDI OLEH USER */
+        function bukaModalSandi() { document.getElementById('modal-sandi').classList.remove('hidden'); }
+        function tutupModalSandi() { document.getElementById('modal-sandi').classList.add('hidden'); }
+        
+        async function prosesUbahSandi() {
+            let s1 = document.getElementById('sandi-baru').value;
+            let s2 = document.getElementById('sandi-konfirmasi').value;
+            let btn = document.getElementById('btn-submit-sandi');
+            
+            if(!s1 || !s2) return alert("Kata sandi tidak boleh kosong!");
+            if(s1 !== s2) return alert("Konfirmasi kata sandi tidak cocok!");
+            
+            btn.disabled = true; btn.innerText = "Menyimpan...";
+            let res = await fetchAPI("changePassword", { username: currentUser.username, newPassword: s1 });
+            
+            alert(res.message);
+            btn.disabled = false; btn.innerText = "Simpan Sandi";
+            
             if(res.status === "SUCCESS") {
-                if(document.getElementById('search-input').value.trim() !== "" && navState.level === 1) {
-                    pencarianGlobalServer(document.getElementById('search-input').value.trim());
-                } else {
-                    loadFilesFromServer(navState.activeFolderId);
-                }
+                tutupModalSandi();
+                document.getElementById('sandi-baru').value = "";
+                document.getElementById('sandi-konfirmasi').value = "";
             }
         }
 
@@ -732,13 +784,11 @@
             let btn = document.getElementById('btn-submit-brankas');
 
             if(!nama || !target) return alert("Kolom nama dan target tidak boleh kosong!");
-            
             btn.disabled = true; btn.innerText = "Menyimpan...";
             let res = await fetchAPI("addBrankas", { nama: nama, icon: icon, tipe: tipe, target: target });
             alert(res.message);
             btn.disabled = false; btn.innerText = "Simpan Brankas";
-            tutupModalBrankas();
-            location.reload();
+            tutupModalBrankas(); location.reload();
         }
 
         async function sinkronServer() {
