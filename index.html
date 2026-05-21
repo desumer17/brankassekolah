@@ -683,9 +683,11 @@
                 let file = files[i];
                 let ext = file.name.split('.').pop();
                 
-                // Rakit nama baku (Underscore separator)
-                let customName = ket ? `${thn}_${giat}_${nm}_${ket}` : `${thn}_${giat}_${nm}`;
-                let formatNama = `${customName}.${ext}`;
+                // Rakit nama baku dan otomatis ubah semua spasi menjadi garis bawah (_)
+                   let rawCustomName = ket ? `${thn}_${giat}_${nm}_${ket}` : `${thn}_${giat}_${nm}`;
+                 // Ekspresi / \s+/g artinya mencari semua jenis spasi/jarak dan menggantinya dengan _
+                    let customName = rawCustomName.replace(/\s+/g, '_'); 
+                    let formatNama = `${customName}.${ext}`;
                 
                 let b64 = "";
                 let finalMimeType = file.type || 'application/octet-stream';
