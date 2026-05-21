@@ -63,7 +63,6 @@
         .explorer-area { padding: 10px 24px 24px; flex: 1; overflow-y: auto; box-sizing: border-box; }
         .section-title { font-size: 13px; font-weight: 600; color: var(--sub); margin: 20px 0 12px 0; padding-bottom: 6px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 0.5px; }
         
-        /* Layout Grid, Large & List */
         .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px; }
         .grid-layout .item-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: 0.2s; box-sizing: border-box; }
         .grid-layout .file-card { flex-direction: column; min-height: 135px; align-items: flex-start; justify-content: space-between; padding: 12px; }
@@ -83,7 +82,6 @@
         .file-card-title { font-size: 13px; font-weight: 500; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-all; margin-top: 10px; margin-bottom: auto; color: var(--text); width: 100%; }
         .file-card-meta { font-size: 11px; color: var(--sub); margin-top: 8px; width: 100%; }
 
-        /* STYLE DESAIN UNTUK TRACKING BADGE */
         .folder-location-badge { font-size: 11px; color: var(--primary); font-weight: 600; margin-top: 5px; background: var(--primary-light); padding: 4px 8px; border-radius: 6px; width: max-content; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
         .folder-location-badge:hover { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 2px 6px rgba(15,118,110,0.2); }
         
@@ -348,7 +346,7 @@
             if (["pdf"].includes(ext)) { conf.icon = "fa-file-pdf"; conf.color = "#ea4335"; } 
             else if (["doc","docx","odt"].includes(ext)) { conf.icon = "fa-file-word"; conf.color = "#1a73e8"; } 
             else if (["xls","xlsx","ods","csv"].includes(ext)) { conf.icon = "fa-file-excel"; conf.color = "#188038"; } 
-            else if (["ppt","pptx"].includes(ext)) { conf.icon = "fa-file-powerpoint"; conf.color = "#f4b400"; } 
+            else if (["ppt","pptx","pps"].includes(ext)) { conf.icon = "fa-file-powerpoint"; conf.color = "#f4b400"; } 
             else if (["jpg","jpeg","png","gif","svg","webp"].includes(ext)) { conf.icon = "fa-file-image"; conf.color = "#fa7b17"; } 
             else if (["zip","rar","7z","tar"].includes(ext)) { conf.icon = "fa-file-archive"; conf.color = "#af52de"; } 
             else if (["mp4","mkv","avi","mov"].includes(ext)) { conf.icon = "fa-file-video"; conf.color = "#e21212"; }
@@ -518,14 +516,12 @@
                 filesArray.forEach(f => {
                     let cfg = getFileIconConfig(f.nama);
                     let actionDom = (currentUser.peran === "SuperAdmin" || navState.brankasNama === "Brankas Pribadi" || f.lokasiFolder === "Brankas Pribadi") ? `<button class="danger" onclick="deleteFile('${f.id}')"><i class="fas fa-trash-alt"></i> Hapus</button>` : "";
-                    
-                    // MODIFIKASI: Mengubah kolom lokasi di mode List menjadi link interaktif
                     let lokasiTd = showLokasi ? `<td><div class="lokasi-cell-click" onclick="event.stopPropagation(); jumpToFolder('${f.lokasiFolderId}', '${f.lokasiFolder}')" title="Klik untuk melompat ke folder ini"><i class="fas fa-folder-open"></i> ${f.lokasiFolder}</div></td>` : "";
 
                     html += `
                         <tr>
                             <td>
-                                <div class="name-cell" onclick="downloadFile('${f.id}')">
+                                <div class="name-cell" onclick="viewFile('${f.id}')">
                                     <i class="fas ${cfg.icon}" style="color:${cfg.color};"></i>
                                     <span>${f.nama}</span>
                                 </div>
@@ -536,7 +532,7 @@
                             <td style="text-align:right; position:relative;">
                                 <button class="action-btn" onclick="toggleCtxMenu(event, '${f.id}')"><i class="fas fa-ellipsis-v"></i></button>
                                 <div id="ctx-${f.id}" class="context-menu hidden" style="top:30px; right:30px;">
-                                    <button onclick="downloadFile('${f.id}')"><i class="fas fa-external-link-alt"></i> Buka Berkas</button>
+                                    <button onclick="downloadFile('${f.id}')"><i class="fas fa-download"></i> Unduh Berkas</button>
                                     ${actionDom}
                                 </div>
                             </td>
@@ -550,8 +546,6 @@
                 filesArray.forEach(f => {
                     let cfg = getFileIconConfig(f.nama);
                     let actionDom = (currentUser.peran === "SuperAdmin" || navState.brankasNama === "Brankas Pribadi" || f.lokasiFolder === "Brankas Pribadi") ? `<button class="danger" onclick="deleteFile('${f.id}')"><i class="fas fa-trash-alt"></i> Hapus</button>` : "";
-                    
-                    // MODIFIKASI: Menambahkan class folder-location-badge yang kini bisa diklik langsung
                     let lokasiBadge = f.lokasiFolder ? `
                         <div class="folder-location-badge" onclick="event.stopPropagation(); jumpToFolder('${f.lokasiFolderId}', '${f.lokasiFolder}')" title="Klik untuk melompat ke folder ini">
                             <i class="fas fa-folder-open"></i> ${f.lokasiFolder}
@@ -559,7 +553,7 @@
 
                     html += `
                         <div class="item-card file-card">
-                            <div class="file-card-top" onclick="downloadFile('${f.id}')">
+                            <div class="file-card-top" onclick="viewFile('${f.id}')">
                                 <i class="fas ${cfg.icon}" style="color:${cfg.color};"></i>
                                 <div class="file-card-title">${f.nama}</div>
                             </div>
@@ -571,7 +565,7 @@
                                     <div class="context-menu-wrapper">
                                         <button class="action-btn" onclick="toggleCtxMenu(event, '${f.id}')"><i class="fas fa-ellipsis-v"></i></button>
                                         <div id="ctx-${f.id}" class="context-menu hidden">
-                                            <button onclick="downloadFile('${f.id}')"><i class="fas fa-external-link-alt"></i> Buka Berkas</button>
+                                            <button onclick="downloadFile('${f.id}')"><i class="fas fa-download"></i> Unduh Berkas</button>
                                             ${actionDom}
                                         </div>
                                     </div>
@@ -612,18 +606,15 @@
             }
         }
 
-        // FITUR UTAMA: FUNGSI NAVIGASI LANGSUNG DARI KLIK BADGE LOKASI
         function jumpToFolder(folderId, folderNama) {
-            document.getElementById('search-input').value = ""; // Bersihkan kolom cari
+            document.getElementById('search-input').value = ""; 
             
-            // 1. Cek apakah folder ini terdaftar sebagai Brankas Utama (Level 2)
             let brankasUtama = DATA_BRANKAS.find(b => b.target === folderId);
             if (brankasUtama) {
                 openBrankas(brankasUtama.target, brankasUtama.nama, brankasUtama.tipe);
                 return;
             }
 
-            // 2. Cek apakah folder ini terdaftar sebagai Sub-Folder (Level 3)
             let namaBrankasInduk = null;
             for (let key in DATA_SUBFOLDERS) {
                 let found = DATA_SUBFOLDERS[key].find(sf => sf.idDrive === folderId);
@@ -636,18 +627,14 @@
             if (namaBrankasInduk) {
                 let brankasInduk = DATA_BRANKAS.find(b => b.nama === namaBrankasInduk);
                 if (brankasInduk) {
-                    // Isi data Brankas induk ke state agar susunan penunjuk jalan (breadcrumb) tidak rusak
                     navState.level = 2;
                     navState.brankasId = brankasInduk.target;
                     navState.brankasNama = brankasInduk.nama;
-                    
-                    // Masuk langsung ke SubFolder tujuan
                     openSubFolder(folderId, folderNama);
                     return;
                 }
             }
             
-            // 3. Fallback alternatif (jika folder dinamis di luar database sheet)
             navState.level = 3;
             navState.brankasId = navState.brankasId || "";
             navState.brankasNama = navState.brankasNama || "Folder Dokumen";
@@ -767,11 +754,47 @@
             setTimeout(() => { stat.innerText = ""; tutupModalUpload(); loadFilesFromServer(navState.activeFolderId); }, 1000);
         }
 
-        async function downloadFile(id) {
-            document.getElementById('loading-msg').classList.remove('hidden');
+        // FUNGSI UNTUK PRATINJAU / LIHAT BERKAS (Ketika nama/judul diklik)
+        function viewFile(id) {
             let previewUrl = `https://drive.google.com/file/d/${id}/view?usp=drivesdk`;
             window.open(previewUrl, '_blank');
-            setTimeout(() => { document.getElementById('loading-msg').classList.add('hidden'); }, 1000);
+        }
+
+        // FUNGSI KHUSUS UNDUH BERKAS (Ketika tombol di dalam menu titik 3 diklik)
+        async function downloadFile(id) {
+            let loading = document.getElementById('loading-msg');
+            let loadingText = document.getElementById('loading-text');
+            loading.classList.remove('hidden');
+            loadingText.innerText = "Mengambil data file dan memproses unduhan otomatis...";
+            
+            try {
+                // Menghubungi Apps Script untuk mengambil data biner asli
+                let res = await fetchAPI("download", { fileId: id });
+                loading.classList.add('hidden');
+                
+                if (res.status === "SUCCESS") {
+                    let raw = window.atob(res.data.base64);
+                    let rawLength = raw.length;
+                    let array = new Uint8Array(new ArrayBuffer(rawLength));
+                    for (let i = 0; i < rawLength; i++) {
+                        array[i] = raw.charCodeAt(i);
+                    }
+                    let blob = new Blob([array], { type: res.data.mimeType });
+                    let lnk = document.createElement('a');
+                    lnk.href = window.URL.createObjectURL(blob);
+                    lnk.download = res.data.nama;
+                    document.body.appendChild(lnk);
+                    lnk.click();
+                    document.body.removeChild(lnk);
+                } else {
+                    throw new Error(res.message);
+                }
+            } catch (e) {
+                // Jalur cadangan (fallback) otomatis jika file berukuran besar melampaui limit base64 Apps Script
+                let fallbackUrl = `https://drive.google.com/uc?export=download&id=${id}`;
+                window.open(fallbackUrl, '_blank');
+                setTimeout(() => { loading.classList.add('hidden'); }, 500);
+            }
         }
 
         async function deleteFile(id) {
@@ -804,7 +827,11 @@
             alert(res.message);
             btn.disabled = false; btn.innerText = "Simpan Sandi";
             
-            if(res.status === "SUCCESS") { tutupModalSandi(); document.getElementById('sandi-baru').value = ""; document.getElementById('sandi-konfirmasi').value = ""; }
+            if(res.status === "SUCCESS") { 
+                tutupModalSandi(); 
+                document.getElementById('sandi-baru').value = ""; 
+                document.getElementById('sandi-konfirmasi').value = ""; 
+            }
         }
 
         function bukaModalBrankas() { document.getElementById('modal-brankas').classList.remove('hidden'); }
